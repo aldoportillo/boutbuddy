@@ -20,29 +20,24 @@ task({ :scrape_athlete_names => :environment }) do
 
   fighter_names = fighers_parsed_page.css(".item-title").uniq.slice(0, 100)
 
-  counter = 0
-
-  fighter_data = []
-  fighter_names.each do |name|
-
-    format_name = name.text.gsub(/\s+/, '-').downcase
-
-    fighter_url = "https://www.ufc.com/athlete/#{format_name}"
-
-    webpage_as_s = HTTP.get(fighter_url).body.to_s
-    parsed_page = Nokogiri::HTML(webpage_as_s)
-
-    fighter_name = parsed_page.css(".hero-profile__name").text
-
+  CSV.open('lib/sample_data/athletes.csv', 'a+') do |csv|
     
-    if fighter_name != ""
-      pp fighter_name
-      pp parsed_page.css(".c-bio__text").flat_map(&:classes)
+    existing = csv.entries
+
+    fighter_names.each do |name|
+      pp name
+      slug = name.text.gsub(/\s+/, '-').downcase
+      unless existing.include?([name, slug])
+        csv << [name, slug]
+      end
     end
 
-    counter += 1
+    puts "Found #{fighter_names.count} new fighters"
   end
-
-  pp counter
   
 end
+
+  # Later
+  ## URL: fighter_url = "https://www.ufc.com/athlete/#{format_name}"
+  ## Name class: .css(".hero-profile__name").text
+  ## Potential Fix to my issue: parsed_page.css(".c-bio__text").flat_map(&:classes)
