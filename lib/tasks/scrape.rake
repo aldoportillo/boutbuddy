@@ -37,7 +37,41 @@ task({ :scrape_athlete_names => :environment }) do
   
 end
 
-  # Later
-  ## URL: fighter_url = "https://www.ufc.com/athlete/#{format_name}"
-  ## Name class: .css(".hero-profile__name").text
-  ## Potential Fix to my issue: parsed_page.css(".c-bio__text").flat_map(&:classes)
+desc "Scrape Athlete Metric Data"
+task({ :scrape_athlete_metrics => :environment }) do
+
+  #Get the slugs from CSV
+  slugs = CSV.read('lib/sample_data/athletes.csv').map { |row| row.at(1) }
+
+  #Make a request to the URL with each slug
+  raw_responses = slugs.map { |slug| HTTP.get("https://www.ufc.com/athlete/#{slug}") }
+  documents = raw_responses.map { |response| Nokogiri::HTML(response.to_s) }
+
+  #Scrape Data
+  fighters_data = documents.map do |doc|
+    image_element = doc.at('img.hero-profile__image')
+    image_src = image_element ? image_element.attr('src') : nil
+
+    {
+      :name => doc.css('.hero-profile__name').text.strip,
+      :image_src => image_src,
+      :age => doc.at('div:contains("Age") > .c-bio__text')&.text&.strip,
+      :reach => doc.at('div:contains("Reach") > .c-bio__text')&.text&.strip,
+      :height => doc.at('div:contains("Height") > .c-bio__text')&.text&.strip,
+      :weight => doc.at('div:contains("Weight") > .c-bio__text')&.text&.strip,
+    }
+  end
+  
+  # Save in csv
+  CSV.open('lib/sample_data/athletes_metrics.csv', 'a+') do |csv|
+    existing = csv.entries
+    fighters_data.each do |fighter|
+      unless existing.include?([fighter[:name], fighter[:image_src], fighter[:age], fighter[:reach], fighter[:height], fighter[:weight]])
+        csv << [fighter[:name], fighter[:image_src], fighter[:age], fighter[:reach], fighter[:height], fighter[:weight]]
+      end
+    end
+  end
+
+  #Print outcome
+  puts "Collected new data for #{fighters_data.count} fighters"
+end
