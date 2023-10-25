@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @weight_class %>
+
+<div>
+  <%= link_to "Edit this weight class", edit_weight_class_path(@weight_class) %> |
+  <%= link_to "Back to weight classes", weight_classes_path %>
+
+  <%= button_to "Destroy this weight class", @weight_class, method: :delete %>
+</div>

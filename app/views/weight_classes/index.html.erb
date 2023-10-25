@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Weight classes</h1>
+
+<div id="weight_classes">
+  <% @weight_classes.each do |weight_class| %>
+    <%= render weight_class %>
+    <p>
+      <%= link_to "Show this weight class", weight_class %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New weight class", new_weight_class_path %>
