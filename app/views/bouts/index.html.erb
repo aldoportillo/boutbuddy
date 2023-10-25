@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Bouts</h1>
+
+<div id="bouts">
+  <% @bouts.each do |bout| %>
+    <%= render bout %>
+    <p>
+      <%= link_to "Show this bout", bout %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New bout", new_bout_path %>

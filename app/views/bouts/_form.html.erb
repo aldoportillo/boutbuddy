@@ -1,0 +1,37 @@
+<%= form_with(model: bout) do |form| %>
+  <% if bout.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(bout.errors.count, "error") %> prohibited this bout from being saved:</h2>
+
+      <ul>
+        <% bout.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :red_corner_id, style: "display: block" %>
+    <%= form.number_field :red_corner_id %>
+  </div>
+
+  <div>
+    <%= form.label :blue_corner_id, style: "display: block" %>
+    <%= form.number_field :blue_corner_id %>
+  </div>
+
+  <div>
+    <%= form.label :event_id, style: "display: block" %>
+    <%= form.number_field :event_id %>
+  </div>
+
+  <div>
+    <%= form.label :weight_class_id, style: "display: block" %>
+    <%= form.number_field :weight_class_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
