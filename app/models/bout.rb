@@ -1,0 +1,2 @@
+class Bout < ApplicationRecord
+end

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @bout %>
+
+<div>
+  <%= link_to "Edit this bout", edit_bout_path(@bout) %> |
+  <%= link_to "Back to bouts", bouts_path %>
+
+  <%= button_to "Destroy this bout", @bout, method: :delete %>
+</div>
