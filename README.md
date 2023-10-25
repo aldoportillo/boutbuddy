@@ -16,6 +16,8 @@ Marketing this product will be difficult but adaption of it will grow the sport.
 
 ## Domain Model
 
+### User
+
 - id
 - email
 - username
@@ -27,7 +29,7 @@ Marketing this product will be difficult but adaption of it will grow the sport.
 - reach
 - height
 
-## Event
+### Event
 
 - id 
 - venue_id
@@ -36,7 +38,7 @@ Marketing this product will be difficult but adaption of it will grow the sport.
 - price
 - bio
 
-## Bout
+### Bout
 
 - id
 - red_corner_fighter_id
@@ -44,13 +46,13 @@ Marketing this product will be difficult but adaption of it will grow the sport.
 - event_id
 - weight_class
 
-## Venue
+### Venue
 
 - id
 - name
 - address
 
-## Weight Class
+### Weight Class
 
 - id
 - name
