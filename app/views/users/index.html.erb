@@ -1,0 +1,6 @@
+<% @users.each do |user| %>
+  <!--TODO: Conditional if user is fighter or not-->
+  <div>
+  <%= link_to "#{user.username}", user_path(user.username) %>
+  </div>
+<% end %>
