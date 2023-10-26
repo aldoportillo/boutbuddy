@@ -8,6 +8,7 @@ task({ :sample_data => :environment }) do
     User.destroy_all
     Venue.destroy_all
     WeightClass.destroy_all
+    Event.destroy_all
   end
 
   # Generate Users
@@ -56,4 +57,20 @@ task({ :sample_data => :environment }) do
 
   pp "There are now #{WeightClass.count} weight classes."
   
+  #Generating Events
+  pp "Generating Events"
+
+  
+  CSV.foreach('lib/sample_data/events.csv', :headers => true) do |row|
+    event = Event.new
+    event.title = row[0]
+    event.bio = row[1]
+    event.time = rand(2.years).seconds.from_now
+    event.price = rand(15..45)
+    event.venue_id = Venue.all.at(rand(1..99)).id
+    event.save
+  end
+
+  pp "There are now #{Event.count} events."
+
 end
