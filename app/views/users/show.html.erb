@@ -1,3 +1,6 @@
-<h1>
-  <%= @user.username %>
-</h1>
+<h1><%= @user.username %></h1>
+<h2>Name: <%= @user.first_name %> <%= @user.last_name %></h2>
+<h2>Weight: <%= @user.weight %></h2>
+<h2>Reach: <%= @user.reach %></h2>
+<h2>Height: <%= @user.height %></h2>
+<%= image_tag @user.photo_url, class: "fighter_image", alt: "#{@user.username}-photo" %>
