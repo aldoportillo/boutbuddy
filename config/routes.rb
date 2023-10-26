@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "landing#index"
+  
+  get("/:username" => "user#show", as: :user) 
 end
