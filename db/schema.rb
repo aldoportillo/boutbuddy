@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_25_203953) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_26_160039) do
   create_table "bouts", force: :cascade do |t|
     t.integer "red_corner_id"
     t.integer "blue_corner_id"
@@ -54,6 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_25_203953) do
     t.float "lng"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address"
   end
 
   create_table "weight_classes", force: :cascade do |t|

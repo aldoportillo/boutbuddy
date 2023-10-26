@@ -3,6 +3,7 @@
 # Table name: venues
 #
 #  id         :integer          not null, primary key
+#  address    :string
 #  lat        :float
 #  lng        :float
 #  name       :string
