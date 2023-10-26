@@ -1,0 +1,15 @@
+name,max,min
+Strawweight,115,nil
+Flyweight,125,115.01
+Bantamweight,135,125.01
+Featherweight,145,135.01
+Lightweight,155,145.01
+Super lightweight,165,155.01 
+Welterweight,170,165.01
+Super welterweight,175,170.01
+Middleweight,185, 175.01
+Super middleweight,195,185.01
+Light heavyweight,205,195.01
+Cruiserweight,225,205.01
+Heavyweight,265,225.01
+Super heavyweight,nil,265.01
