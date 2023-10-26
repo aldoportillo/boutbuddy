@@ -7,6 +7,7 @@ task({ :sample_data => :environment }) do
   if Rails.env.development?
     User.destroy_all
     Venue.destroy_all
+    WeightClass.destroy_all
   end
 
   # Generate Users
@@ -41,4 +42,18 @@ task({ :sample_data => :environment }) do
 
   pp "There are now #{Venue.count} venues."
 
+  # Generating Weight Classes
+  pp "Generating Weight Classes"
+
+  #Might need to generate this first to I can add a weight class ID to user that takes user's weight to get weight class
+  CSV.foreach('lib/sample_data/weight_classes.csv', :headers => true) do |row|
+    weight_class = WeightClass.new
+    weight_class.name = row.fetch("name")
+    weight_class.max = row.fetch("max")
+    weight_class.min = row.fetch("min")
+    weight_class.save
+  end
+
+  pp "There are now #{WeightClass.count} weight classes."
+  
 end
