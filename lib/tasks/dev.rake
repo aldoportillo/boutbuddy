@@ -22,8 +22,9 @@ task({ :sample_data => :environment }) do
     user.reach = row[3]
     user.height = row[4]
     user.weight = row[5]
-    user.email = "#{row[0].split.at(0)}-#{row[0].split.at(1)}@example.com"
+    user.email = "#{row[0].split.at(0)}-#{row[0].split.at(1)}@mma.com"
     user.password = "password"
+    user.username = row[0].gsub(/\s+/, '-').downcase
     user.save
   end
 
