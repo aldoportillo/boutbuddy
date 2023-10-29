@@ -10,6 +10,7 @@ task({ :sample_data => :environment }) do
     WeightClass.destroy_all
     Event.destroy_all
     Bout.destroy_all
+    Message.destroy_all
   end
 
   # Generate Users
@@ -100,4 +101,26 @@ task({ :sample_data => :environment }) do
 
   pp "There are now #{Bout.count} bouts."
 
+  ##Generate Messages
+  pp "Generating Messages"
+
+  events = Event.all
+  events.each do |event|
+    5.times do
+      sender1 = event.red_corner_fighters.all.sample
+      sender1.messages.create(
+        event_id = event.id,
+        user_id = sender1.id,
+        content = "oooooo"
+      )
+      sender2 = event.blue_corner_fighters.all.sample
+      sender2.messages.create(
+        event_id = event.id,
+        user_id = sender2.id,
+        content = "aaaaaa"
+      )
+    end
+  end
+
+  pp "There are now #{Message.count} messages."
 end
