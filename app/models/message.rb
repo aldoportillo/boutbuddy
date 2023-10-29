@@ -10,4 +10,5 @@
 #  user_id    :integer
 #
 class Message < ApplicationRecord
+  belongs_to :event
 end

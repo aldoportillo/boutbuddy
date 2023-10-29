@@ -10,4 +10,5 @@
 #  updated_at :datetime         not null
 #
 class WeightClass < ApplicationRecord
+  has_many :bouts
 end

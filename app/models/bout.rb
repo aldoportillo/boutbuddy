@@ -11,4 +11,6 @@
 #  weight_class_id :integer
 #
 class Bout < ApplicationRecord
+
+  has_many :weight_classes, class_name: "weight_class_id", foreign_key: "weight_class_id"
 end
