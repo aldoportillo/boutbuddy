@@ -31,7 +31,7 @@ Marketing this product will be difficult but adaption of it will grow the sport.
 
 ### Event
 
-- id 
+- id
 - venue_id
 - title
 - time
@@ -50,6 +50,8 @@ Marketing this product will be difficult but adaption of it will grow the sport.
 
 - id
 - name
+- lat
+- lng
 - address
 
 ### Weight Class
@@ -58,3 +60,10 @@ Marketing this product will be difficult but adaption of it will grow the sport.
 - name
 - min
 - max
+
+### Message
+
+- id
+- event_id
+- user_id
+- content
