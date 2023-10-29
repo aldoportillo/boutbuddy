@@ -13,7 +13,9 @@
 #
 class Event < ApplicationRecord
 
+  belongs_to :venue
   has_many :bouts, class_name: "Bouts", foreign_key: "user_id"
   has_many :messages, class_name: "Message", foreign_key: "user_id"
+
   
 end
