@@ -31,7 +31,8 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
-  has_many :bouts, class_name: "Bouts", foreign_key: "user_id"
+  has_many :registered_bouts, class_name: "Bout", foreign_key: "red_corner_id"
+  has_many :accepted_bouts, class_name: "Bout", foreign_key: "blue_corner_id"
   has_many :messages, class_name: "Message", foreign_key: "user_id"
   
 end

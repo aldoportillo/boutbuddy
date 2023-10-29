@@ -11,5 +11,5 @@
 #  updated_at :datetime         not null
 #
 class Venue < ApplicationRecord
-  has_many :events, class_name: "Event", foreign_key: "event_id"
+  has_many :events, class_name: "Event", foreign_key: "venue_id"
 end
