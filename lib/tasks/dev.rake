@@ -9,6 +9,7 @@ task({ :sample_data => :environment }) do
     Venue.destroy_all
     WeightClass.destroy_all
     Event.destroy_all
+    Bout.destroy_all
   end
 
   # Generate Users
@@ -73,5 +74,30 @@ task({ :sample_data => :environment }) do
   end
 
   pp "There are now #{Event.count} events."
+
+  ##Generating Bouts
+  pp "Generating Bouts"
+
+  users = User.all
+  users.each do |first_user|
+    users.each do |second_user|
+      if rand < 0.10
+        first_user.registered_bouts.create(
+          blue_corner_id: rand < 0.50 ? second_user.id : nil,
+          event_id: Event.all[rand(78)].id,
+          weight_class_id: WeightClass.all[rand(13)].id
+        )
+      end
+
+      # if rand < 0.75
+      #   second_user.sent_follow_requests.create(
+      #     recipient: first_user,
+      #     status: FollowRequest.statuses.keys.sample
+      #   )
+      # end
+    end
+  end
+
+  pp "There are now #{Bout.count} bouts."
 
 end
