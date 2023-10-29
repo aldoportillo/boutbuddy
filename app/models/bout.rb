@@ -11,4 +11,7 @@
 #  weight_class_id :integer
 #
 class Bout < ApplicationRecord
+
+  belongs_to :event
+  belongs_to :weight_class
 end

@@ -12,4 +12,13 @@
 #  venue_id   :integer
 #
 class Event < ApplicationRecord
+
+  belongs_to :venue
+  has_many :bouts, class_name: "Bout", foreign_key: "event_id"
+  has_many :messages, class_name: "Message", foreign_key: "event_id"
+
+  has_many(:red_corner_fighters, :through => "bouts", :source => "event", :foreign_key => "red_corner_id")
+  has_many(:blue_corner_fighters, :through => "bouts", :source => "event", :foreign_key => "blue_corner_id")
+
+
 end
