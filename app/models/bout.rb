@@ -14,4 +14,7 @@ class Bout < ApplicationRecord
 
   belongs_to :event
   belongs_to :weight_class
+
+  belongs_to :red_corner_fighter, class_name: "User", foreign_key: "red_corner_id"
+  belongs_to :blue_corner_fighter, class_name: "User", foreign_key: "blue_corner_id"
 end
