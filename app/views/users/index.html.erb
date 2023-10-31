@@ -1,7 +1,12 @@
-<% @users.each do |user| %>
-  <!--TODO: Conditional if user is fighter or not-->
-  <div>
-    <%= image_tag user.photo_url, class: "fighter_image", alt: "#{user.username}-photo" %>
-    <h2><%= link_to "#{user.first_name} #{user.last_name}", user_path(user.username) %></h2>
-  </div>
-<% end %>
+<div class="fighters_page">
+  <% @users.each do |user| %>
+    <!--TODO: Conditional if user is fighter or not-->
+    <%= link_to user_path(user.username) do %>
+    <div class="fighter_card">
+      <h2><%= user.first_name %> <%= user.last_name %></h2> 
+      <%= image_tag user.photo_url, class: "fighter_image", alt: "#{user.username}-photo" %>
+    </div>
+    <% end %>
+  <% end %>
+  
+</div>

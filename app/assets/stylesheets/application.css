@@ -16,14 +16,15 @@
 
 
 *{
-  background-color: black;
-  
-  color: wheat;
+  color: white;
 }
 
 body{
   margin: 0 10vw 0 10vw;
   border: 1px solid white;
+  background-color: black;
+  
+  
 }
 
 header{
@@ -39,4 +40,35 @@ header > nav {
 
 nav, h1{
   border: 1px solid white;
+}
+
+
+/*For Fighters*/
+
+.fighters_page{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap:4vw;
+}
+.fighter_card{
+  border: 1px solid white;
+  border-radius: 2vw;
+  width: auto;
+  background-image: url("fence.png");
+  background-color: rgb(40, 40, 40);
+}
+
+.fighter_card > h2{
+  background: none;
+}
+.fighter_card > img{
+  width: 20vw;
+  background: none;
+}
+
+.fighter_page{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
 }
