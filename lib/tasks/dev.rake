@@ -1,3 +1,5 @@
+require "faker"
+
 desc "Fill the database tables with some sample data"
 task({ :sample_data => :environment }) do
 
@@ -89,13 +91,6 @@ task({ :sample_data => :environment }) do
           weight_class_id: WeightClass.all[rand(13)].id
         )
       end
-
-      # if rand < 0.75
-      #   second_user.sent_follow_requests.create(
-      #     recipient: first_user,
-      #     status: FollowRequest.statuses.keys.sample
-      #   )
-      # end
     end
   end
 
@@ -105,20 +100,14 @@ task({ :sample_data => :environment }) do
   pp "Generating Messages"
 
   events = Event.all
+  
   events.each do |event|
-    5.times do
-      sender1 = event.red_corner_fighters.all.sample
-      sender1.messages.create(
-        event_id = event.id,
-        user_id = sender1.id,
-        content = "oooooo"
-      )
-      sender2 = event.blue_corner_fighters.all.sample
-      sender2.messages.create(
-        event_id = event.id,
-        user_id = sender2.id,
-        content = "aaaaaa"
-      )
+
+    event.red_corner_fighters.each do |fighter|
+      fighter.messages.create(event_id: event.id, user_id: fighter.id, content: Faker::Quote.most_interesting_man_in_the_world )
+    end
+    event.blue_corner_fighters.each do |fighter|
+      fighter.messages.create(event_id: event.id, user_id: fighter.id, content: Faker::Quote.most_interesting_man_in_the_world )
     end
   end
 
