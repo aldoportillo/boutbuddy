@@ -17,4 +17,6 @@ class Bout < ApplicationRecord
 
   belongs_to :red_corner_fighter, class_name: "User", foreign_key: "red_corner_id"
   belongs_to :blue_corner_fighter, class_name: "User", foreign_key: "blue_corner_id"
+
+  #TODO: Return Fighters that do not have a blue corner fighter
 end
