@@ -89,3 +89,15 @@ nav, h1{
   display: flex;
   gap:2vw;
 }
+
+
+.bout_card{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bout_card > div{
+  display: flex;
+  align-items: center;
+}
