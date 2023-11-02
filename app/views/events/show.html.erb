@@ -13,7 +13,7 @@
 </div>
 <div class="__space_between">
   <h3><%= @event.venue.name %></h3>
-  <%= link_to new_bout_path do %>
+  <%= link_to new_event_bout_path(@event) do %>
     <button>Register</button>
   <% end %>
 </div>
@@ -26,7 +26,7 @@
 <h3>Bouts</h3>
 
 <% @event.bouts.each do |bout|%>
-  <%= render partial:"shared/bout", locals: { bout: bout} %>
+  <%= render partial:"/bouts/bout", locals: { bout: bout} %>
 <% end %>
 
 <h3>Messages</h3>
