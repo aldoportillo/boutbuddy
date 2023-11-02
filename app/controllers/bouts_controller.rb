@@ -1,9 +1,11 @@
 class BoutsController < ApplicationController
+  before_action :set_event
   before_action :set_bout, only: %i[ show edit update destroy ]
 
   # GET /bouts or /bouts.json
   def index
-    @bouts = Bout.all
+    #@bouts = Bout.all
+    @bouts = @event.bouts
   end
 
   # GET /bouts/1 or /bouts/1.json
@@ -59,12 +61,20 @@ class BoutsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_bout
-      @bout = Bout.find(params[:id])
-    end
+    # def set_bout
+    #   @bout = Bout.find(params[:id])
+    # end
 
     # Only allow a list of trusted parameters through.
     def bout_params
       params.require(:bout).permit(:red_corner_id, :blue_corner_id, :event_id, :weight_class_id)
+    end
+
+    def set_event
+      @event = Event.find(params[:event_id])
+    end
+
+    def set_bout
+      @bout = @event.bouts.find(params[:id])
     end
 end
