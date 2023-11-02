@@ -1,0 +1,28 @@
+<div class="bout_card" id="<%= dom_id bout %>">
+
+  <!--Red-->
+  <div class_name="red_corner">
+  <img src="<%= bout.red_corner_fighter.photo_url %>" style="width:100px; height: 100px; object-fit: cover; object-position: 0 0;"/>
+
+  <div class="stats">
+    <%= link_to user_path(bout.red_corner_fighter.username) do %>
+      <h4><%= bout.red_corner_fighter.first_name %> <%= bout.red_corner_fighter.last_name %></h4>
+    <% end %>
+    <p>Reach: <%= bout.red_corner_fighter.reach%></p>
+    <p>Height: <%= bout.red_corner_fighter.height%></p>
+  </div>
+  </div>
+  <h3><%= bout.weight_class.name %></h3>
+  <!--Blue-->
+
+  <div class_name="blue_corner">
+    <div class="stats">
+      <%= link_to user_path(bout.blue_corner_fighter.username) do %>
+        <h4><%= bout.blue_corner_fighter.first_name %> <%= bout.blue_corner_fighter.last_name %></h4>
+      <% end %>
+      <p>Reach: <%= bout.blue_corner_fighter.reach%></p>
+      <p>Height: <%= bout.blue_corner_fighter.height%></p>
+    </div>
+    <img src="<%= bout.blue_corner_fighter.photo_url %>" style="width:100px; height: 100px; object-fit: cover; object-position: 0 0;"/>
+  </div>
+</div>
