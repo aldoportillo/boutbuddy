@@ -36,4 +36,12 @@ class User < ApplicationRecord
   has_many :messages, class_name: "Message", foreign_key: "user_id"
   
   #TODO: Point to weightclass ID on signup
+
+  def weight_class_id
+    return WeightClass.where('min <= :weight AND max >= :weight', weight: self.weight).at(0).id
+  end
+  
+  def weight_class_name
+    return WeightClass.where('min <= :weight AND max >= :weight', weight: self.weight).at(0).id
+  end
 end
