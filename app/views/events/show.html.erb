@@ -7,10 +7,8 @@
   <% @event.messages.each do |message| %>
 
     <%= render partial:"shared/message", locals: { message: message} %>
-    <%= link_to user_path(message.user.username) do %>
-      <%= message.user.first_name %> <%=message.user.last_name %>
-    <% end %>
-    <%= message.content%>
+    
+
   <% end %>
   
 <div>
