@@ -27,7 +27,7 @@ class BoutsController < ApplicationController
 
     respond_to do |format|
       if @bout.save
-        format.html { redirect_to bout_url(@bout), notice: "Bout was successfully created." }
+        format.html { redirect_to event_url(@bout.event), notice: "Bout was successfully created." }
         format.json { render :show, status: :created, location: @bout }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -75,6 +75,6 @@ class BoutsController < ApplicationController
     end
 
     def set_bout
-      @bout = @event.bouts.find(params[:id])
+      @bout = @event.bouts.find(params)
     end
 end
