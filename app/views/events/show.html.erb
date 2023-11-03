@@ -25,7 +25,7 @@
 
 <h3>Bouts</h3>
 
-<% @event.bouts.each do |bout|%>
+<% @event.confirmed_bouts.each do |bout|%>
   <%= render partial:"/bouts/bout", locals: { bout: bout} %>
 <% end %>
 

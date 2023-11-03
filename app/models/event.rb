@@ -21,12 +21,7 @@ class Event < ApplicationRecord
   has_many(:blue_corner_fighters, :through => "bouts", :source => "blue_corner_fighter", :foreign_key => "blue_corner_id")
 
 
-  def confirmed_bouts
-    return Bout.where('blue_corner_id != :sample_id', sample_id: 1)
-  end
-  
-  def unconfirmed_bouts
-    return Bout.where('blue_corner_id == :sample_id', sample_id: 1)
-  end
+  has_many(:unconfirmed_bouts, -> {unconfirmed}, :class_name => "Bout", :foreign_key => "event_id")
+  has_many(:confirmed_bouts, -> {confirmed}, :class_name => "Bout", :foreign_key => "event_id")
 
 end
