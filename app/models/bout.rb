@@ -19,6 +19,6 @@ class Bout < ApplicationRecord
   belongs_to :blue_corner_fighter, class_name: "User", foreign_key: "blue_corner_id"
 
 
-  scope :unconfirmed, -> { where(blue_corner_id => 1) }
+  scope :unconfirmed, -> { where('blue_corner_id == :val', val: 1) }
   scope :confirmed, -> { where('blue_corner_id != :val', val: 1) }
 end
