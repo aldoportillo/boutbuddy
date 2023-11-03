@@ -119,10 +119,14 @@ task({ :sample_data => :environment }) do
   events.each do |event|
 
     event.red_corner_fighters.each do |fighter|
-      fighter.messages.create(event_id: event.id, user_id: fighter.id, content: Faker::Quote.most_interesting_man_in_the_world )
+      if fighter.id != 1
+        fighter.messages.create(event_id: event.id, user_id: fighter.id, content: Faker::Quote.most_interesting_man_in_the_world )
+      end
     end
     event.blue_corner_fighters.each do |fighter|
-      fighter.messages.create(event_id: event.id, user_id: fighter.id, content: Faker::Quote.most_interesting_man_in_the_world )
+      if fighter.id != 1
+        fighter.messages.create(event_id: event.id, user_id: fighter.id, content: Faker::Quote.most_interesting_man_in_the_world )
+      end
     end
   end
 
