@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   root "landing#index"
   
   get("/fighters" => "user#index", as: :users)
+  get("/fighters/stack" => "user#stack", as: :user)
   get("/fighters/:username" => "user#show", as: :user) 
+  
   
 end

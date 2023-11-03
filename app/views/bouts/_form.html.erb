@@ -28,7 +28,7 @@
 
   <div>
     <!--%= form.label :weight_class_id, style: "display: block" %-->
-    <%= form.hidden_field :weight_class_id, :value => current_user.weight_class_id %>
+    <%= form.hidden_field :weight_class_id, :value => current_user.weight_class.id %>
   </div>
 
  <p>By clicking agree. You consent to taking a random opponent</p>

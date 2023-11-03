@@ -37,11 +37,11 @@ class User < ApplicationRecord
   
   #TODO: Point to weightclass ID on signup
 
-  def weight_class_id
-    return WeightClass.where('min <= :weight AND max >= :weight', weight: self.weight).at(0).id
+  def weight_class
+    return WeightClass.where('min <= :weight AND max >= :weight', weight: self.weight).at(0)
   end
-  
-  def weight_class_name
-    return WeightClass.where('min <= :weight AND max >= :weight', weight: self.weight).at(0).id
+
+  def stack
+    return self.weight_class.unmatched_bouts
   end
 end
