@@ -17,6 +17,28 @@
     <%= f.input :password_confirmation,
                 required: false,
                 input_html: { autocomplete: "new-password" } %>
+    
+                <%= f.input :first_name,
+                required: true,
+                input_html: { autocomplete: "first_name" } %>
+    <%= f.input :last_name,
+                required: true,
+                input_html: { autocomplete: "last_name" } %>
+    <%= f.input :photo_url,
+                required: true,
+                input_html: { autocomplete: "photo_url" } %>
+    <%= f.input :weight,
+                required: true,
+                input_html: { autocomplete: "weight" } %>
+    <%= f.input :reach,
+                required: true,
+                input_html: { autocomplete: "reach" } %>
+    <%= f.input :username,
+                required: true,
+                input_html: { autocomplete: "username" } %>
+    <%= f.label :role, style: "display: block" %>
+    <%= f.select :role, options_for_select(["fighter", "promoter"]) %>
+
     <%= f.input :current_password,
                 hint: "we need your current password to confirm your changes",
                 required: true,
