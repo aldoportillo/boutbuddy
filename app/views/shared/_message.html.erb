@@ -1,0 +1,11 @@
+<div class="message" id="<%= dom_id message %>">
+
+  <img src="<%= message.user.photo_url %>" style="width:100px; height: 100px; object-fit: cover; object-position: 0 0;"/>
+  <div class="message-content">
+    <%= link_to user_path(message.user.username) do %>
+    <h4><%= message.user.first_name %> <%= message.user.last_name %></h4>
+    <% end %>
+    <p><%= message.content %></p>
+  </div>
+
+</div>

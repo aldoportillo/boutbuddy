@@ -13,3 +13,87 @@
  *= require_tree .
  *= require_self
  */
+
+
+*{
+  color: white;
+}
+
+body{
+  margin: 0 10vw 0 10vw;
+  background-color: #252525;
+  
+  
+}
+
+.__space_between{
+  display: flex;
+  justify-content: space-between;
+}
+
+input{
+  color: black;
+}
+
+header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between ;
+}
+
+header > nav {
+  display: flex;
+  align-items: center;
+}
+
+
+
+/*For Fighters*/
+
+.fighters_page{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap:4vw;
+}
+.fighter_card{
+  border: 1px solid white;
+  border-radius: 2vw;
+  width: auto;
+  background-image: url("fence.png");
+  background-color: rgb(40, 40, 40);
+}
+
+.fighter_card > h2{
+  background: none;
+}
+.fighter_card > img{
+  width: 20vw;
+  background: none;
+}
+
+.fighter_page{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+
+/*message*/
+
+.message{
+  display: flex;
+  gap:2vw;
+}
+
+
+.bout_card{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bout_card > div{
+  display: flex;
+  align-items: center;
+}

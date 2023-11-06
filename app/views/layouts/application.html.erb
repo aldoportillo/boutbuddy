@@ -11,7 +11,14 @@
   </head>
 
   <body>
-    <%= render partial: "shared/navbar" %>
-    <%= yield %>
+    <header>
+      <h1>BoutBuddy</h1>
+      <%= render partial: "shared/navbar" %>
+    </header>
+    <div class="main">
+      <%= yield %>
+    </div>
+    <footer>
+    </footer>
   </body>
 </html>

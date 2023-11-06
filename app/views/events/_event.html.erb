@@ -5,8 +5,13 @@
   </p>
 
   <p>
+    <strong>Date:</strong>
+    <%= event.time.strftime("%a, %b %e, %Y") %>
+  </p>
+
+  <p>
     <strong>Time:</strong>
-    <%= event.time %>
+    <%= event.time.strftime("%l:%M %p") %>
   </p>
 
   <p>
@@ -21,7 +26,10 @@
 
   <p>
     <strong>Venue:</strong>
-    <%= event.venue_id %>
+    <!--Get Params from here to fetch GMAPS API-->
+    <%= event.venue.name %>
   </p>
+
+  
 
 </div>

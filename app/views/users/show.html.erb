@@ -1,6 +1,22 @@
-<h1><%= @user.username %></h1>
-<h2>Name: <%= @user.first_name %> <%= @user.last_name %></h2>
-<h2>Weight: <%= @user.weight %></h2>
-<h2>Reach: <%= @user.reach %></h2>
-<h2>Height: <%= @user.height %></h2>
-<%= image_tag @user.photo_url, class: "fighter_image", alt: "#{@user.username}-photo" %>
+<div class="fighter_page">
+
+  <%= image_tag @user.photo_url, class: "fighter_image", alt: "#{@user.username}-photo" %>
+  <div class="fighter_info">
+    <h2><%= @user.first_name %> <%= @user.last_name %></h2>
+    <h2><%= @user.weight %> lbs</h2>
+    <h2>Reach: <%= @user.reach %></h2>
+    <h2>Height: <%= @user.height %></h2>
+    <h3>Upcoming Bouts</h3>
+    <% @user.accepted_bouts.each do |bout|%>
+    <%= link_to event_path(bout.event.id) do %>
+      <div class="bout_info">
+        <%= bout.event.title%>
+      </div>
+    <% end %>
+    <% end %>
+    <h3>Previous Bouts</h3>
+  </div>
+
+
+  
+</div>

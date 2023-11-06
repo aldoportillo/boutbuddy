@@ -4,7 +4,7 @@
 
 <div id="messages">
   <% @messages.each do |message| %>
-    <%= render message %>
+    <%= render partial:"shared/message", locals: { message: message} %>
     <p>
       <%= link_to "Show this message", message %>
     </p>

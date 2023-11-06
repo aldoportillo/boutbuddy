@@ -18,6 +18,20 @@ task({ :sample_data => :environment }) do
   # Generate Users
   pp "Generating Users"
 
+  user = User.new
+  user.id = 1
+  user.first_name = "null"
+  user.last_name = "null"
+  user.reach = 100
+  user.height = 100
+  user.weight = 100
+  user.email = "nullnull@mma.com"
+  user.password = "password"
+  user.username = "nullnull"
+  user.photo_url = "https://www.littleglassjar.com/wp-content/uploads/2014/11/deer-head-silhouette.jpg"
+  user.role = "undetermined"
+  user.save
+
   CSV.foreach('lib/sample_data/athletes_metrics.csv', :headers => true) do |row|
     user = User.new
     user.first_name = row[0].split.at(0)
@@ -27,6 +41,7 @@ task({ :sample_data => :environment }) do
     user.height = row[4]
     user.weight = row[5]
     user.email = "#{row[0].split.at(0)}-#{row[0].split.at(1)}@mma.com"
+    user.role = row[6]
     user.password = "password"
     user.username = row[0].gsub(/\s+/, '-').downcase
     user.save
@@ -83,13 +98,15 @@ task({ :sample_data => :environment }) do
 
   users = User.all
   users.each do |first_user|
-    users.each do |second_user|
-      if rand < 0.10
-        first_user.registered_bouts.create(
-          blue_corner_id: rand < 0.50 ? second_user.id : nil,
-          event_id: Event.all[rand(78)].id,
-          weight_class_id: WeightClass.all[rand(13)].id
-        )
+    if first_user.id != 1
+      users.each do |second_user|
+        if rand < 0.10
+          first_user.registered_bouts.create(
+            blue_corner_id: rand < 0.50 ? second_user.id : 1,
+            event_id: Event.all[rand(78)].id,
+            weight_class_id: WeightClass.all[rand(13)].id
+          )
+        end
       end
     end
   end
@@ -104,10 +121,14 @@ task({ :sample_data => :environment }) do
   events.each do |event|
 
     event.red_corner_fighters.each do |fighter|
-      fighter.messages.create(event_id: event.id, user_id: fighter.id, content: Faker::Quote.most_interesting_man_in_the_world )
+      if fighter.id != 1
+        fighter.messages.create(event_id: event.id, user_id: fighter.id, content: Faker::Quote.most_interesting_man_in_the_world )
+      end
     end
     event.blue_corner_fighters.each do |fighter|
-      fighter.messages.create(event_id: event.id, user_id: fighter.id, content: Faker::Quote.most_interesting_man_in_the_world )
+      if fighter.id != 1
+        fighter.messages.create(event_id: event.id, user_id: fighter.id, content: Faker::Quote.most_interesting_man_in_the_world )
+      end
     end
   end
 
