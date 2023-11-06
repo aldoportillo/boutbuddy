@@ -29,6 +29,7 @@ task({ :sample_data => :environment }) do
   user.password = "password"
   user.username = "nullnull"
   user.photo_url = "https://www.littleglassjar.com/wp-content/uploads/2014/11/deer-head-silhouette.jpg"
+  user.role = "undetermined"
   user.save
 
   CSV.foreach('lib/sample_data/athletes_metrics.csv', :headers => true) do |row|
@@ -40,6 +41,7 @@ task({ :sample_data => :environment }) do
     user.height = row[4]
     user.weight = row[5]
     user.email = "#{row[0].split.at(0)}-#{row[0].split.at(1)}@mma.com"
+    user.role = row[6]
     user.password = "password"
     user.username = row[0].gsub(/\s+/, '-').downcase
     user.save
