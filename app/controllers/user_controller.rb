@@ -11,9 +11,6 @@ class UserController < ApplicationController
     render "users/show"
   end
 
-  def stack
-    @bouts = current_user.stack
-    render "users/stack"
-  end
+
   
 end
