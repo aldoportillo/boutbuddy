@@ -1,7 +1,7 @@
 class UserController < ApplicationController
 
   def index
-    @users = User.all
+    @users = User.where(:role => "fighter")
     render "users/index"
     
   end
