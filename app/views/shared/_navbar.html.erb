@@ -5,6 +5,17 @@
 
   <% if user_signed_in? %>
 
+    <% if current_user.role == "promoter" %>
+        <%= link_to "New event", new_event_path %>
+        <!-- Add My venues and My events here -->
+    <% end %>
+
+
+    <% if current_user.role == "fighter" %>
+        <!-- Add stack and my fights here-->
+    <% end %>
+
+
       <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
 
     
