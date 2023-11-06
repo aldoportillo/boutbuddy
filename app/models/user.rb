@@ -35,6 +35,7 @@ class User < ApplicationRecord
   has_many :accepted_bouts, class_name: "Bout", foreign_key: "blue_corner_id"
   has_many :messages, class_name: "Message", foreign_key: "user_id"
   
+  enum role: {admin: "admin", fighter: "fighter", promoter: "promoter", sample:}
   #TODO: Point to weightclass ID on signup
 
   def weight_class
