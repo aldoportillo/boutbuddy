@@ -7,6 +7,7 @@
 
     <% if current_user.role == "promoter" %>
         <%= link_to "New event", new_event_path %>
+        <%= link_to "New venue", new_venue_path %>
         <!-- Add My venues and My events here -->
     <% end %>
 
