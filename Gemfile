@@ -89,6 +89,7 @@ gem "dotenv-rails"
 gem "faker"
 gem "htmlbeautifier"
 gem "http"
+gem "httparty"
 gem "sqlite3", "~> 1.4"
 gem "table_print"
 

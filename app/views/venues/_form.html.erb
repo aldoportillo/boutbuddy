@@ -13,17 +13,25 @@
 
   <div>
     <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, placeholder:"MGM Grand Hotel" %>
   </div>
 
+  <%
+=begin %>
   <div>
     <%= form.label :lat, style: "display: block" %>
     <%= form.text_field :lat %>
-  </div>
+  </#div>
 
   <div>
     <%= form.label :lng, style: "display: block" %>
     <%= form.text_field :lng %>
+  </div>
+  <%
+=end %>
+  <div>
+    <%= form.label :address %>
+    <%= form.text_field :address, placeholder: "3799 S Las Vegas Blvd, Las Vegas, NV, 89109"%>
   </div>
 
   <div>

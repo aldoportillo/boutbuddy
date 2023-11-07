@@ -11,5 +11,8 @@
 #  updated_at :datetime         not null
 #
 class Venue < ApplicationRecord
+  validates :name, :address, presence: true
+  
   has_many :events, class_name: "Event", foreign_key: "venue_id"
+  
 end

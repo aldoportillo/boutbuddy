@@ -32,9 +32,13 @@
   </div>
 
   <div>
-    <%= form.label :venue_id, style: "display: block" %>
-    <%= form.number_field :venue_id %>
+    <%= form.label :venue_name, style: "display: block" %>
+    <%= form.select :venue_id, options_for_select(Venue.pluck(:name, :id), @event.venue_id) %>
   </div>
+
+  <%= form.hidden_field :promoter_id, :value => current_user.id%>
+
+  <div>
 
   <div>
     <%= form.submit %>
