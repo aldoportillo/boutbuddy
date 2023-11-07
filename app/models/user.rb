@@ -32,6 +32,13 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
+  #FOR PROMOTER
+
+  has_many :events, foreign_key: "promoter_id"
+  has_many :venues, foreign_key: "promoter_id"
+
+  #FOR FIGHTER
+
   has_many :registered_bouts, class_name: "Bout", foreign_key: "red_corner_id"
   has_many :accepted_bouts, class_name: "Bout", foreign_key: "blue_corner_id"
   has_many :messages, class_name: "Message", foreign_key: "user_id"
@@ -39,6 +46,7 @@ class User < ApplicationRecord
   enum role: {admin: "admin", fighter: "fighter", promoter: "promoter", undetermined: "undetermined"}
   #TODO: Point to weightclass ID on signup
 
+  private
   def weight_class
     return WeightClass.where('min <= :weight AND max >= :weight', weight: self.weight).at(0)
   end
