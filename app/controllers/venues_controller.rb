@@ -77,7 +77,7 @@ class VenuesController < ApplicationController
     end
 
     def venue_params
-      params.require(:venue).permit(:name, :address)
+      params.require(:venue).permit(:name, :address, :promoter_id)
     end
   
     def get_coordinates_from_address(address)

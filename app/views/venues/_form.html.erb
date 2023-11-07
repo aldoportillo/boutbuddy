@@ -34,6 +34,8 @@
     <%= form.text_field :address, placeholder: "3799 S Las Vegas Blvd, Las Vegas, NV, 89109"%>
   </div>
 
+    <%= form.hidden_field :promoter_id, :value => current_user.id%>
+
   <div>
     <%= form.submit %>
   </div>

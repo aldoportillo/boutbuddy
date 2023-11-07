@@ -47,6 +47,70 @@ task({ :sample_data => :environment }) do
     user.save
   end
 
+  user = User.new
+  user.first_name = "Cage"
+  user.last_name = "Rage"
+  user.reach = 100
+  user.height = 100
+  user.weight = 100
+  user.email = "cage-rage@mma.com"
+  user.password = "password"
+  user.username = "cage-rage"
+  user.photo_url = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/027/6ac3bb5e647003418405493cdcf3ae61_crop_exact.jpg"
+  user.role = "promoter"
+  user.save
+
+  user = User.new
+  user.first_name = "King"
+  user.last_name = "Cage"
+  user.reach = 100
+  user.height = 100
+  user.weight = 100
+  user.email = "king-cage@mma.com"
+  user.password = "password"
+  user.username = "king-cage"
+  user.photo_url = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/028/440a28f3a80ff916053d2d3d1ce22f0c_crop_exact.jpg"
+  user.role = "promoter"
+  user.save
+
+  user = User.new
+  user.first_name = "bella"
+  user.last_name = "tor"
+  user.reach = 100
+  user.height = 100
+  user.weight = 100
+  user.email = "bellator@mma.com"
+  user.password = "password"
+  user.username = "bellator"
+  user.photo_url = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/031/61a46750e6d1fc750ccdfd814d02d5ec_crop_exact.jpg"
+  user.role = "promoter"
+  user.save
+
+  user = User.new
+  user.first_name = "strike"
+  user.last_name = "force"
+  user.reach = 100
+  user.height = 100
+  user.weight = 100
+  user.email = "strike-force@mma.com"
+  user.password = "password"
+  user.username = "strike-force"
+  user.photo_url = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/032/1798cc866e656bfb7d7a196f16f4de86_crop_exact.jpg"
+  user.role = "promoter"
+  user.save
+
+  user = User.new
+  user.first_name = "one"
+  user.last_name = "fc"
+  user.reach = 100
+  user.height = 100
+  user.weight = 100
+  user.email = "one-fc@mma.com"
+  user.password = "password"
+  user.username = "one-fc"
+  user.photo_url = "https://mma.prnewswire.com/media/814161/ONE_Championship_black_logo_sq_Logo.jpg?p=facebook"
+  user.role = "promoter"
+  user.save
   pp "There are now #{User.count} users."
 
   # Generating Venues
@@ -58,6 +122,7 @@ task({ :sample_data => :environment }) do
     venue.lat = row[8]
     venue.lng = row[9]
     venue.address = row[7]
+    venue.promoter_id = User.where(:role => "promoter").at(rand(0..4)).id
     venue.save
   end
 
@@ -87,8 +152,9 @@ task({ :sample_data => :environment }) do
     event.bio = row[1]
     event.time = rand(2.years).seconds.from_now
     event.price = rand(15..45)
-    event.venue_id = Venue.all.at(rand(1..99)).id
-    event.save
+    event.venue_id = Venue.all.at(rand(1..98)).id
+    event.promoter_id = User.where(:role => "promoter").at(rand(0..4)).id
+    event.save!
   end
 
   pp "There are now #{Event.count} events."
