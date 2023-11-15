@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_07_173007) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_15_211122) do
   create_table "bouts", force: :cascade do |t|
     t.integer "red_corner_id"
     t.integer "blue_corner_id"
@@ -35,6 +35,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_07_173007) do
     t.integer "event_id"
     t.integer "user_id"
     t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "swipes", force: :cascade do |t|
+    t.integer "swiper_id"
+    t.integer "swiped_id"
+    t.boolean "like"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
