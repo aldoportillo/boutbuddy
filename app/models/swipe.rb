@@ -10,4 +10,6 @@
 #  swiper_id  :integer
 #
 class Swipe < ApplicationRecord
+  belongs_to :swiper, class_name: 'User'
+  belongs_to :swiped, class_name: 'User'
 end
