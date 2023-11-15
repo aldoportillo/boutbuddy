@@ -122,7 +122,7 @@ task({ :sample_data => :environment }) do
     venue.lat = row[8]
     venue.lng = row[9]
     venue.address = row[7]
-    venue.promoter_id = User.where(:role => "promoter").at(rand(0..4)).id
+    venue.promoter_id = User.where(:role => "promoter").sample.id
     venue.save
   end
 
@@ -152,8 +152,8 @@ task({ :sample_data => :environment }) do
     event.bio = row[1]
     event.time = rand(2.years).seconds.from_now
     event.price = rand(15..45)
-    event.venue_id = Venue.all.at(rand(1..98)).id
-    event.promoter_id = User.where(:role => "promoter").at(rand(0..4)).id
+    event.venue_id = Venue.all.sample.id
+    event.promoter_id = User.where(:role => "promoter").sample.id
     event.save!
   end
 
@@ -169,8 +169,8 @@ task({ :sample_data => :environment }) do
         if rand < 0.10
           first_user.registered_bouts.create(
             blue_corner_id: rand < 0.50 ? second_user.id : 1,
-            event_id: Event.all[rand(78)].id,
-            weight_class_id: WeightClass.all[rand(13)].id
+            event_id: Event.all.sample.id,
+            weight_class_id: WeightClass.all.sample.id
           )
         end
       end
