@@ -34,7 +34,7 @@ class SwipesController < ApplicationController
     
     bout.event = find_suitable_event
 
-    bout.weight_class_id = 761 ##bandaid: setting weight class statically
+    bout.weight_class_id = current_user.weight_class.id
 
     bout.save #Need a way to notify user but l8r
     # respond_to do |format|
