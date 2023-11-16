@@ -1,5 +1,5 @@
 name,max,min
-Strawweight,115,nil
+Strawweight,115,0
 Flyweight,125,115.01
 Bantamweight,135,125.01
 Featherweight,145,135.01
@@ -12,4 +12,4 @@ Super middleweight,195,185.01
 Light heavyweight,205,195.01
 Cruiserweight,225,205.01
 Heavyweight,265,225.01
-Super heavyweight,nil,265.01
+Super heavyweight,400,265.01

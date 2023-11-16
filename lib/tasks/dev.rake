@@ -15,22 +15,24 @@ task({ :sample_data => :environment }) do
     Message.destroy_all
   end
 
+
+  # Generating Weight Classes
+  pp "Generating Weight Classes"
+
+  #Might need to generate this first to I can add a weight class ID to user that takes user's weight to get weight class
+  CSV.foreach('lib/sample_data/weight_classes.csv', :headers => true) do |row|
+    weight_class = WeightClass.new
+    weight_class.name = row.fetch("name")
+    weight_class.max = row.fetch("max")
+    weight_class.min = row.fetch("min")
+    weight_class.save
+  end
+
+  pp "There are now #{WeightClass.count} weight classes."
+
+
   # Generate Users
   pp "Generating Users"
-
-  user = User.new
-  user.id = 1
-  user.first_name = "null"
-  user.last_name = "null"
-  user.reach = 100
-  user.height = 100
-  user.weight = 100
-  user.email = "nullnull@mma.com"
-  user.password = "password"
-  user.username = "nullnull"
-  user.photo_url = "https://www.littleglassjar.com/wp-content/uploads/2014/11/deer-head-silhouette.jpg"
-  user.role = "undetermined"
-  user.save
 
   CSV.foreach('lib/sample_data/athletes_metrics.csv', :headers => true) do |row|
     user = User.new
@@ -127,20 +129,6 @@ task({ :sample_data => :environment }) do
   end
 
   pp "There are now #{Venue.count} venues."
-
-  # Generating Weight Classes
-  pp "Generating Weight Classes"
-
-  #Might need to generate this first to I can add a weight class ID to user that takes user's weight to get weight class
-  CSV.foreach('lib/sample_data/weight_classes.csv', :headers => true) do |row|
-    weight_class = WeightClass.new
-    weight_class.name = row.fetch("name")
-    weight_class.max = row.fetch("max")
-    weight_class.min = row.fetch("min")
-    weight_class.save
-  end
-
-  pp "There are now #{WeightClass.count} weight classes."
   
   #Generating Events
   pp "Generating Events"
