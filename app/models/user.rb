@@ -51,9 +51,20 @@ class User < ApplicationRecord
     return WeightClass.where('min <= :weight AND max >= :weight', weight: self.weight).at(0)
   end
 
+  def users_not_swiped_on
+    User.where.not(id: self.id)
+        .where.not(id: swiped_user_ids)
+        .where(role: "fighter")
+        #Also filter by weight class
+  end
+
   private
   
   def stack
     return self.weight_class.unmatched_bouts
+  end
+
+  def swiped_user_ids
+    given_swipes.select(:swiped_id)
   end
 end

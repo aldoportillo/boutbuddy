@@ -4,21 +4,25 @@
 
   <div class="carousel-items">
     <div class="fighter-card">
-      <h3><%= @fighter.username %></h3>
-      <!-- Add more fighter details here -->
-      <img src=<%= @fighter.photo_url%>>
+      <% if @fighter %>
+        <h3><%= @fighter.username %></h3>
+        <!-- Add more fighter details here -->
+        <img src=<%= @fighter.photo_url%>>
 
-      <%= form_with model: Swipe.new, url: swipes_path do |form| %>
-        <%= form.hidden_field :swiper_id, value: current_user.id %>
-        <%= form.hidden_field :swiped_id, value: @fighter.id %> 
-        <%= form.hidden_field :like, value: true %>
-        <%= form.submit "Swipe Right", class: "btn btn-primary" %>
-      <% end %>
-      <%= form_with model: Swipe.new, url: swipes_path do |form| %>
-        <%= form.hidden_field :swiper_id, value: current_user.id %>
-        <%= form.hidden_field :swiped_id, value: @fighter.id %> 
-        <%= form.hidden_field :like, value: false %>
-        <%= form.submit "Swipe Left", class: "btn btn-danger" %>
+        <%= form_with model: Swipe.new, url: swipes_path do |form| %>
+          <%= form.hidden_field :swiper_id, value: current_user.id %>
+          <%= form.hidden_field :swiped_id, value: @fighter.id %> 
+          <%= form.hidden_field :like, value: true %>
+          <%= form.submit "Swipe Right", class: "btn btn-primary" %>
+        <% end %>
+        <%= form_with model: Swipe.new, url: swipes_path do |form| %>
+          <%= form.hidden_field :swiper_id, value: current_user.id %>
+          <%= form.hidden_field :swiped_id, value: @fighter.id %> 
+          <%= form.hidden_field :like, value: false %>
+          <%= form.submit "Swipe Left", class: "btn btn-danger" %>
+        <% end %>
+      <% else %>
+        <h3>No More fighters :(</h3>
       <% end %>
     </div>
   </div>
