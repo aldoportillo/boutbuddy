@@ -55,7 +55,7 @@ class User < ApplicationRecord
     User.where.not(id: self.id)
         .where.not(id: swiped_user_ids)
         .where(role: "fighter")
-        #Also filter by weight class
+        .where(weight_class_id: self.weight_class_id)
   end
 
 
