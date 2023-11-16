@@ -8,7 +8,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
         <%if current_user&.role == "fighter" %>
-            <li class="nav-item"><%= link_to "Carosel", users_path, class: "nav-link"%></li>
+            <li class="nav-item"><%= link_to "Carosel", fighters_carousel_path, class: "nav-link"%></li>
             <li class="nav-item"><%= link_to "Events", events_path, class: "nav-link"%></li>
         <% elsif current_user&.role == "promoter" %>
             <li class="nav-item"><%= link_to "My Venues", venues_path, class: "nav-link"%></li>
@@ -19,7 +19,7 @@
         <% end %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <%= "#{current_user.first_name} #{current_user.last_name}" || "User" %>
+            <%= current_user ? "#{current_user&.first_name} #{current_user&.last_name}" : "User" %>
           </a>
           <ul class="dropdown-menu">
             <%# <li><hr class="dropdown-divider"></li> %>

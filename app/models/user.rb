@@ -32,25 +32,27 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
+  #FOR FIGHTER
+  has_many :bouts
+  has_many :events, through: :bouts
+
+  # Swipes relationships
+  has_many :given_swipes, class_name: 'Swipe', foreign_key: 'swiper_id'
+  has_many :received_swipes, class_name: 'Swipe', foreign_key: 'swiped_id'
+
   #FOR PROMOTER
 
-  has_many :events, foreign_key: "promoter_id"
-  has_many :venues, foreign_key: "promoter_id"
-
-  #FOR FIGHTER
-
-  has_many :registered_bouts, class_name: "Bout", foreign_key: "red_corner_id"
-  has_many :accepted_bouts, class_name: "Bout", foreign_key: "blue_corner_id"
-  has_many :messages, class_name: "Message", foreign_key: "user_id"
+  has_many :own_events, foreign_key: "promoter_id"
+  has_many :own_venues, foreign_key: "promoter_id"
   
   enum role: {admin: "admin", fighter: "fighter", promoter: "promoter", undetermined: "undetermined"}
-  #TODO: Point to weightclass ID on signup
 
-  private
   def weight_class
     return WeightClass.where('min <= :weight AND max >= :weight', weight: self.weight).at(0)
   end
 
+  private
+  
   def stack
     return self.weight_class.unmatched_bouts
   end

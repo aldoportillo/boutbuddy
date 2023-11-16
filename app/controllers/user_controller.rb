@@ -11,6 +11,11 @@ class UserController < ApplicationController
     render "users/show"
   end
 
+  def carousel
+    @fighter = User.where(:role => "fighter").sample ##Implement where :weight_class => current_user.weight_class
+    render "users/carousel"
+  end
+
 
   
 end
