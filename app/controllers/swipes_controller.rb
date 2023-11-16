@@ -1,9 +1,10 @@
 class SwipesController < ApplicationController
   def create
     swipe = Swipe.new(swipe_params)
+    
     if swipe.save
       check_for_match(swipe)
-      # Handle response, e.g., render JSON
+      format.html { redirect_to root_url, notice: "Bout was successfully created." }
     else
       # Handle error
     end
