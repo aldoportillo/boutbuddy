@@ -64,8 +64,8 @@ class User < ApplicationRecord
 
   #FOR PROMOTER
 
-  has_many :own_events, foreign_key: "promoter_id"
-  has_many :own_venues, foreign_key: "promoter_id"
+  has_many :own_events, class_name: "Event", foreign_key: "promoter_id"
+  has_many :own_venues, class_name: "Venue", foreign_key: "promoter_id"
   
   enum role: {admin: "admin", fighter: "fighter", promoter: "promoter", undetermined: "undetermined"}
 

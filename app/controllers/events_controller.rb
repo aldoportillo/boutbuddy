@@ -3,13 +3,16 @@ class EventsController < ApplicationController
 
   # GET /events or /events.json
   def index
-    @events = Event.all
+    
 
     ##USE PUNDIT FOR THIS LATER
     if current_user&.role == "fighter"
       @events = current_user.events
+    elsif current_user&.role == "promoter"
+      @events = current_user.own_events
+    else
+      @events = Event.all
     end
-
     
   end
 

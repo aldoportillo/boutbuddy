@@ -6,7 +6,12 @@ class VenuesController < ApplicationController
 
   # GET /venues or /venues.json
   def index
-    @venues = Venue.all
+    ##USE PUNDIT FOR THIS LATER
+    if current_user&.role == "promoter"
+      @venues = current_user.own_venues
+    else
+      @venues = Venue.all
+    end
   end
 
   # GET /venues/1 or /venues/1.json
