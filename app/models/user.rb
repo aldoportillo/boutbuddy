@@ -58,6 +58,7 @@ class User < ApplicationRecord
         #Also filter by weight class
   end
 
+
   private
   
   def stack
@@ -68,6 +69,12 @@ class User < ApplicationRecord
     self.weight_class = WeightClass.where('min <= :weight AND max >= :weight', weight: self.weight).first
   end
 
+  # To manually add weight class run this script in rails c for now make sure you remove assign_weight_class
+
+  # User.find_each do |user|
+  #   user.assign_weight_class
+  #   user.save
+  # end
   def swiped_user_ids
     given_swipes.select(:swiped_id)
   end
