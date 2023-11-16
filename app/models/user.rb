@@ -47,12 +47,12 @@ class User < ApplicationRecord
   
   enum role: {admin: "admin", fighter: "fighter", promoter: "promoter", undetermined: "undetermined"}
 
-
-  private
   def weight_class
     return WeightClass.where('min <= :weight AND max >= :weight', weight: self.weight).at(0)
   end
 
+  private
+  
   def stack
     return self.weight_class.unmatched_bouts
   end
