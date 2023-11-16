@@ -12,7 +12,7 @@ class UserController < ApplicationController
   end
 
   def carousel
-    @fighter = User.where(:role => "fighter").sample ##Implement where :weight_class => current_user.weight_class
+    @fighter = current_user.users_not_swiped_on.sample
     render "users/carousel"
   end
 
