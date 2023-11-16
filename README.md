@@ -67,3 +67,10 @@ Marketing this product will be difficult but adaption of it will grow the sport.
 - event_id
 - user_id
 - content
+
+### Swipes
+
+- id
+- swiper_id
+- swiped_id
+- like:bool
