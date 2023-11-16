@@ -9,7 +9,7 @@
 
         <%if current_user&.role == "fighter" %>
             <li class="nav-item"><%= link_to "Carosel", fighters_carousel_path, class: "nav-link"%></li>
-            <li class="nav-item"><%= link_to "Events", events_path, class: "nav-link"%></li>
+            <li class="nav-item"><%= link_to "My Events", events_path, class: "nav-link"%></li>
         <% elsif current_user&.role == "promoter" %>
             <li class="nav-item"><%= link_to "My Venues", venues_path, class: "nav-link"%></li>
             <li class="nav-item"><%= link_to "My Events", events_path, class: "nav-link"%></li>

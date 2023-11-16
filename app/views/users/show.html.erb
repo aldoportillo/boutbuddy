@@ -7,7 +7,7 @@
     <h2>Reach: <%= @user.reach %></h2>
     <h2>Height: <%= @user.height %></h2>
     <h3>Upcoming Bouts</h3>
-    <% @user.accepted_bouts.each do |bout|%>
+    <% @user.bouts.each do |bout|%>
     <%= link_to event_path(bout.event.id) do %>
       <div class="bout_info">
         <%= bout.event.title%>

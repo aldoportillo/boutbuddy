@@ -4,6 +4,13 @@ class EventsController < ApplicationController
   # GET /events or /events.json
   def index
     @events = Event.all
+
+    ##USE PUNDIT FOR THIS LATER
+    if current_user&.role == "fighter"
+      @events = current_user.events
+    end
+
+    
   end
 
   # GET /events/1 or /events/1.json
