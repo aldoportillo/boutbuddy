@@ -15,12 +15,7 @@ class SwipesController < ApplicationController
 
       if @swipe.save
         if check_for_match(@swipe)
-          if create_bout(@swipe)
             redirect_to event_path(@bout.event_id) and return ##Would be cool to get to a "You have a match page" to display info on the other guy and then visit event from there definetly possible too since bout has event_id and fighter_id for now lets route directly to event
-          else
-            flash.now[:alert] = 'Failed to create a bout.'
-            render :new and return
-          end
         else
         end
       else

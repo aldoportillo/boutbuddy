@@ -35,9 +35,28 @@ class User < ApplicationRecord
   before_save :assign_weight_class
 
   #FOR FIGHTER
-  has_many :bouts
-  has_many :events, through: :bouts
+
   belongs_to :weight_class, optional: true
+
+  ##START Ian's table suggestion will get rid of this!
+
+  has_many :red_corner_bouts, class_name: 'Bout', foreign_key: 'red_corner_id'
+  has_many :blue_corner_bouts, class_name: 'Bout', foreign_key: 'blue_corner_id'
+
+  def bouts
+    Bout.where("red_corner_id = :id OR blue_corner_id = :id", id: self.id)
+  end
+
+
+  has_many :red_corner_events, through: :red_corner_bouts, source: :event
+  has_many :blue_corner_events, through: :blue_corner_bouts, source: :event
+
+  def events
+    (red_corner_events + blue_corner_events).uniq
+  end
+
+
+  ##END
 
   # Swipes relationships
   has_many :given_swipes, class_name: 'Swipe', foreign_key: 'swiper_id'
@@ -45,8 +64,8 @@ class User < ApplicationRecord
 
   #FOR PROMOTER
 
-  has_many :own_events, foreign_key: "promoter_id"
-  has_many :own_venues, foreign_key: "promoter_id"
+  has_many :own_events, class_name: "Event", foreign_key: "promoter_id"
+  has_many :own_venues, class_name: "Venue", foreign_key: "promoter_id"
   
   enum role: {admin: "admin", fighter: "fighter", promoter: "promoter", undetermined: "undetermined"}
 
@@ -69,12 +88,6 @@ class User < ApplicationRecord
     self.weight_class = WeightClass.where('min <= :weight AND max >= :weight', weight: self.weight).first
   end
 
-  # To manually add weight class run this script in rails c for now make sure you remove assign_weight_class
-
-  # User.find_each do |user|
-  #   user.assign_weight_class
-  #   user.save
-  # end
   def swiped_user_ids
     given_swipes.select(:swiped_id)
   end

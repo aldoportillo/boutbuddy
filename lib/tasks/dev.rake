@@ -13,6 +13,7 @@ task({ :sample_data => :environment }) do
     Event.destroy_all
     Bout.destroy_all
     Message.destroy_all
+    Swipe.destroy_all
   end
 
 
@@ -147,25 +148,47 @@ task({ :sample_data => :environment }) do
 
   pp "There are now #{Event.count} events."
 
-  ##Generating Bouts
-  pp "Generating Bouts"
+  #Generating Swipes
+  pp "Generating Swipes"
 
-  users = User.all
-  users.each do |first_user|
-    if first_user.id != 1
-      users.each do |second_user|
-        if rand < 0.10
-          first_user.registered_bouts.create(
-            blue_corner_id: rand < 0.50 ? second_user.id : 1,
-            event_id: Event.all.sample.id,
-            weight_class_id: WeightClass.all.sample.id
-          )
-        end
+  User.find_each do |user|
+
+    eligible_users = User.where(weight_class_id: user.weight_class_id).where.not(id: user.id)
+
+    eligible_users.find_each do |other_user|
+      if rand < 0.25
+        Swipe.create!(
+          swiper_id: user.id,
+          swiped_id: other_user.id,
+          like: true
+          # like: [true, false].sample 
+        )
       end
     end
   end
 
-  pp "There are now #{Bout.count} bouts."
+  pp "There are now #{Swipe.count} swipes"
+
+  pp "Generating Bouts"
+  
+  Swipe.where(like: true).find_each do |swipe|
+      
+      if Swipe.exists?(swiper_id: swipe.swiped_id, swiped_id: swipe.swiper_id, like: true)
+        
+        unless Bout.exists?(red_corner_id: swipe.swiper_id, blue_corner_id: swipe.swiped_id) ||
+               Bout.exists?(red_corner_id: swipe.swiped_id, blue_corner_id: swipe.swiper_id)
+
+          Bout.create!(
+            red_corner_id: swipe.swiper_id,
+            blue_corner_id: swipe.swiped_id,
+            event_id: Event.order("RANDOM()").first.id,
+            weight_class_id: User.find(swipe.swiper_id).weight_class_id
+          )
+        end
+      end
+    end
+    pp "There are now #{Bout.count} Bouts"
+
 
   ##Generate Messages
   pp "Generating Messages"
