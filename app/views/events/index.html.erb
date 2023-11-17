@@ -2,11 +2,10 @@
 
 <h1>Events</h1>
 
-<div id="events">
+<div class="container" id="events">
+  <div class="row">
   <% @events.each do |event| %>
     <%= render event %>
-    <p>
-      <%= link_to "Show this event", event %>
-    </p>
   <% end %>
+</div>
 </div>
