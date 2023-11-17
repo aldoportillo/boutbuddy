@@ -40,27 +40,34 @@ class SwipesController < ApplicationController
     end
   end
 
-  def create_bout(swipe)
-    
-    @bout = Bout.new(event: find_suitable_event, weight_class_id: current_user.weight_class.id)
-
-    if @bout.save
-      create_participation(@bout, swipe.swiper_id, 'red')
-      create_participation(@bout, swipe.swiped_id, 'blue')
-    end
-  end
-
   def create_participation(bout, user_id, corner)
     Participation.create(bout: bout, user_id: user_id, corner: corner)
   end
 
-  def find_suitable_event
-    Event.left_joins(:bouts)
-         .group('events.id')
-         .having('COUNT(bouts.id) < 12')
-         .order('events.time ASC')
-         .first
-         #Make sure a fighter cannot be in an event twice when youre done with participants table
+  def find_suitable_event(swiper_id, swiped_id)
+    # Get the ids of events in which either user is already participating
+    events_with_swiper = Event.joins(bouts: :participations).where(participations: { user_id: swiper_id }).ids
+    events_with_swiped = Event.joins(bouts: :participations).where(participations: { user_id: swiped_id }).ids
+    excluded_event_ids = events_with_swiper | events_with_swiped
+
+    # Find a suitable event that neither user is part of
+    Event.where.not(id: excluded_event_ids)
+        .left_joins(:bouts)
+        .group('events.id')
+        .having('COUNT(bouts.id) < 12')
+        .order('events.time ASC')
+        .first
+  end
+
+  def create_bout(swipe)
+    suitable_event = find_suitable_event(swipe.swiper_id, swipe.swiped_id)
+    return unless suitable_event
+    @bout = Bout.new(event: suitable_event, 
+                     weight_class_id: User.find(swipe.swiper_id).weight_class_id)
+    if @bout.save
+      create_participation(@bout, swipe.swiper_id, 'red')
+      create_participation(@bout, swipe.swiped_id, 'blue')
+    end
   end
 
 end
