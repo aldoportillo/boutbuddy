@@ -42,14 +42,16 @@ class SwipesController < ApplicationController
 
   def create_bout(swipe)
     
-    @bout = Bout.new(red_corner_id: swipe.swiper_id, blue_corner_id: swipe.swiped_id)
-    
-    @bout.event = find_suitable_event
+    @bout = Bout.new(event: find_suitable_event, weight_class_id: current_user.weight_class.id)
 
-    @bout.weight_class_id = current_user.weight_class.id
+    if @bout.save
+      create_participation(@bout, swipe.swiper_id, 'red')
+      create_participation(@bout, swipe.swiped_id, 'blue')
+    end
+  end
 
-    @bout.save 
-    
+  def create_participation(bout, user_id, corner)
+    Participation.create(bout: bout, user_id: user_id, corner: corner)
   end
 
   def find_suitable_event
@@ -58,6 +60,7 @@ class SwipesController < ApplicationController
          .having('COUNT(bouts.id) < 12')
          .order('events.time ASC')
          .first
+         #Make sure a fighter cannot be in an event twice when youre done with participants table
   end
 
 end
