@@ -13,7 +13,17 @@ class Bout < ApplicationRecord
   belongs_to :event
 
   has_many :participations
-  has_many :users, through: :participations
+  has_many :fighters, through: :participations, source: :user
+
+  def red_corner_fighter
+    fighters.joins(:participations).find_by(participations: { corner: 'red' })
+  end
+
+  def blue_corner_fighter
+    fighters.joins(:participations).find_by(participations: { corner: 'blue' })
+  end
+
+
 
   belongs_to :weight_class
   
