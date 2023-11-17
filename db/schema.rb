@@ -12,8 +12,6 @@
 
 ActiveRecord::Schema[7.0].define(version: 2023_11_17_162817) do
   create_table "bouts", force: :cascade do |t|
-    t.integer "red_corner_id"
-    t.integer "blue_corner_id"
     t.integer "event_id"
     t.integer "weight_class_id"
     t.datetime "created_at", null: false
