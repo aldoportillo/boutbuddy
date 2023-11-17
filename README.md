@@ -28,6 +28,8 @@ Marketing this product will be difficult but adaption of it will grow the sport.
 - weight
 - reach
 - height
+- weight_class_id
+- role
 
 ### Event
 
@@ -37,14 +39,13 @@ Marketing this product will be difficult but adaption of it will grow the sport.
 - time
 - price
 - bio
+- promoter_id
 
 ### Bout
 
 - id
-- red_corner_fighter_id
-- blue_corner_fighter_id
 - event_id
-- weight_class
+- weight_class_id
 
 ### Venue
 
@@ -53,6 +54,7 @@ Marketing this product will be difficult but adaption of it will grow the sport.
 - lat
 - lng
 - address
+- promoter_id
 
 ### Weight Class
 
@@ -74,3 +76,14 @@ Marketing this product will be difficult but adaption of it will grow the sport.
 - swiper_id
 - swiped_id
 - like:bool
+
+### Participation
+
+- id
+- user_id
+- bout_id
+- corner: red/blue
+
+## ERD
+
+![ERD](erd.png)

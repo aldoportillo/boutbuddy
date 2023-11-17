@@ -172,21 +172,23 @@ task({ :sample_data => :environment }) do
   pp "Generating Bouts"
   
   Swipe.where(like: true).find_each do |swipe|
+    if Swipe.exists?(swiper_id: swipe.swiped_id, swiped_id: swipe.swiper_id, like: true)
       
-      if Swipe.exists?(swiper_id: swipe.swiped_id, swiped_id: swipe.swiper_id, like: true)
+      existing_bouts = Bout.joins(:participations).where(participations: { user_id: [swipe.swiper_id, swipe.swiped_id] })
+      unless existing_bouts.exists?
         
-        unless Bout.exists?(red_corner_id: swipe.swiper_id, blue_corner_id: swipe.swiped_id) ||
-               Bout.exists?(red_corner_id: swipe.swiped_id, blue_corner_id: swipe.swiper_id)
-
-          Bout.create!(
-            red_corner_id: swipe.swiper_id,
-            blue_corner_id: swipe.swiped_id,
-            event_id: Event.order("RANDOM()").first.id,
-            weight_class_id: User.find(swipe.swiper_id).weight_class_id
-          )
+        bout = Bout.create!(
+          event: Event.order("RANDOM()").first,
+          weight_class_id: User.find(swipe.swiper_id).weight_class_id
+        )
+  
+        if bout.persisted?
+          Participation.create!(bout: bout, user_id: swipe.swiper_id, corner: 'red')
+          Participation.create!(bout: bout, user_id: swipe.swiped_id, corner: 'blue')
         end
       end
     end
+  end
     pp "There are now #{Bout.count} Bouts"
 
 
@@ -194,18 +196,15 @@ task({ :sample_data => :environment }) do
   pp "Generating Messages"
 
   events = Event.all
-  
-  events.each do |event|
 
-    event.red_corner_fighters.each do |fighter|
-      if fighter.id != 1
-        fighter.messages.create(event_id: event.id, user_id: fighter.id, content: Faker::Quote.most_interesting_man_in_the_world )
-      end
-    end
-    event.blue_corner_fighters.each do |fighter|
-      if fighter.id != 1
-        fighter.messages.create(event_id: event.id, user_id: fighter.id, content: Faker::Quote.most_interesting_man_in_the_world )
-      end
+  events.each do |event|
+    participating_users = User.joins(:participations).where(participations: { bout: event.bouts }).distinct
+    participating_users.each do |user|
+      Message.create!(
+        user: user,
+        event: event,
+        content: Faker::Quote.most_interesting_man_in_the_world
+      )
     end
   end
 

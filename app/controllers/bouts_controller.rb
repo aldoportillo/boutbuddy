@@ -67,7 +67,7 @@ class BoutsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bout_params
-      params.require(:bout).permit(:red_corner_id, :blue_corner_id, :event_id, :weight_class_id)
+      params.require(:bout).permit(:event_id, :weight_class_id)
     end
 
     def set_event

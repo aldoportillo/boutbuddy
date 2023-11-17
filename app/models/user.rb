@@ -38,25 +38,10 @@ class User < ApplicationRecord
 
   belongs_to :weight_class, optional: true
 
-  ##START Ian's table suggestion will get rid of this!
+  has_many :participations
+  has_many :bouts, through: :participations
+  has_many :events, -> { distinct }, through: :bouts
 
-  has_many :red_corner_bouts, class_name: 'Bout', foreign_key: 'red_corner_id'
-  has_many :blue_corner_bouts, class_name: 'Bout', foreign_key: 'blue_corner_id'
-
-  def bouts
-    Bout.where("red_corner_id = :id OR blue_corner_id = :id", id: self.id)
-  end
-
-
-  has_many :red_corner_events, through: :red_corner_bouts, source: :event
-  has_many :blue_corner_events, through: :blue_corner_bouts, source: :event
-
-  def events
-    (red_corner_events + blue_corner_events).uniq
-  end
-
-
-  ##END
 
   # Swipes relationships
   has_many :given_swipes, class_name: 'Swipe', foreign_key: 'swiper_id'
