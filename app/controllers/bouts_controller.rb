@@ -26,10 +26,6 @@ class BoutsController < ApplicationController
     @bout = Bout.new(bout_params)
 
     respond_to do |format|
-
-      create_participation(@bout, params[:red_corner_id], 'red')
-      create_participation(@bout, params[:blue_corner_id], 'blue')
-
       if @bout.save
         format.html { redirect_to event_url(@bout.event), notice: "Bout was successfully created." }
         format.json { render :show, status: :created, location: @bout }
@@ -71,11 +67,7 @@ class BoutsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bout_params
-      params.require(:bout).permit(:red_corner_id, :blue_corner_id, :event_id, :weight_class_id)
-    end
-
-    def create_participation(bout, user_id, corner)
-      Participation.create(bout: bout, user_id: user_id, corner: corner)
+      params.require(:bout).permit(:event_id, :weight_class_id)
     end
 
     def set_event
