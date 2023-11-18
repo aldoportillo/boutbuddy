@@ -1,12 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Venues</h1>
-
-<div id="venues">
-  <% @venues.each do |venue| %>
-    <%= render venue %>
-    <p>
-      <%= link_to "Show this venue", venue %>
-    </p>
+<div class="row justify-content-between align-items-center">
+  <h2 class="col">Venues</h2>
+  <% if current_user.role == "promoter"%>
+    <%= link_to 'New Venue', new_venue_path, class: 'btn btn-primary col-auto' %>
   <% end %>
+</div>
+
+<div class="container">
+  <div class="row">
+    <% @venues.each do |venue| %>
+      <%= render venue %>
+    <% end %>
+  </div>
 </div>
