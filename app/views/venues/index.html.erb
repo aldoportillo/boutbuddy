@@ -2,7 +2,7 @@
 
 <div class="row justify-content-between align-items-center">
   <h2 class="col">Venues</h2>
-  <% if current_user.role == "promoter"%>
+  <% if current_user&.role == "promoter"%>
     <%= link_to 'New Venue', new_venue_path, class: 'btn btn-primary col-auto' %>
   <% end %>
 </div>
