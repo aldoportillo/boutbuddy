@@ -1,44 +1,62 @@
-<h2>Sign up</h2>
+<h2 class="text-center mb-4">Sign up</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'needs-validation', novalidate: true }) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :first_name,
-                required: true,
-                input_html: { autocomplete: "first_name" } %>
-    <%= f.input :last_name,
-                required: true,
-                input_html: { autocomplete: "last_name" } %>
-    <%= f.input :photo_url,
-                required: true,
-                input_html: { autocomplete: "photo_url" } %>
-    <%= f.input :weight,
-                required: true,
-                input_html: { autocomplete: "weight" } %>
-    <%= f.input :reach,
-                required: true,
-                input_html: { autocomplete: "reach" } %>
-    <%= f.input :username,
-                required: true,
-                input_html: { autocomplete: "username" } %>
-    <%= f.label :role, style: "display: block" %>
-    <%= f.select :role, options_for_select(["fighter", "promoter"]) %>
+  <div class="form-group mb-3">
+    <%= f.label :email, class: 'form-label' %>
+    <%= f.email_field :email, required: true, autofocus: true, class: 'form-control', autocomplete: "email" %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+  <div class="row">
+    <div class="form-group col-md-6 mb-3">
+      <%= f.label :password, class: 'form-label' %>
+      <%= f.password_field :password, required: true, class: 'form-control', autocomplete: "new-password", minlength: @minimum_password_length %>
+    </div>
+    <div class="form-group col-md-6 mb-3">
+      <%= f.label :password_confirmation, class: 'form-label' %>
+      <%= f.password_field :password_confirmation, required: true, class: 'form-control', autocomplete: "new-password" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-6 mb-3">
+      <%= f.label :first_name, class: 'form-label' %>
+      <%= f.text_field :first_name, required: true, class: 'form-control', autocomplete: "first_name" %>
+    </div>
+    <div class="form-group col-md-6 mb-3">
+      <%= f.label :last_name, class: 'form-label' %>
+      <%= f.text_field :last_name, required: true, class: 'form-control', autocomplete: "last_name" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-4 mb-3">
+      <%= f.label :weight, class: 'form-label' %>
+      <%= f.number_field :weight, required: true, class: 'form-control', autocomplete: "weight" %>
+    </div>
+    <div class="form-group col-md-4 mb-3">
+      <%= f.label :reach, class: 'form-label' %>
+      <%= f.number_field :reach, required: true, class: 'form-control', autocomplete: "reach" %>
+    </div>
+    <div class="form-group col-md-4 mb-3">
+      <%= f.label :height, class: 'form-label' %>
+      <%= f.number_field :height, required: true, class: 'form-control', autocomplete: "height" %>
+    </div>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= f.label :username, class: 'form-label' %>
+    <%= f.text_field :username, required: true, class: 'form-control', autocomplete: "username" %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= f.label :role, class: 'form-label' %>
+    <%= f.select :role, options_for_select(["fighter", "promoter"]), {}, { class: 'form-select' } %>
+  </div>
+
+  <div class="form-actions text-center">
+    <%= f.submit "Sign up", class: 'btn btn-primary' %>
   </div>
 <% end %>
 
