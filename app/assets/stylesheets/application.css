@@ -1,3 +1,22 @@
 .fence-background{
   background-image: url("fence.png")
 }
+
+#fighterCarousel {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+}
+
+.fighter-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.fighter-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
