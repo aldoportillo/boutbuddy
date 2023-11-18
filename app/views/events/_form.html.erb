@@ -1,8 +1,7 @@
-<%= form_with(model: event) do |form| %>
+<%= form_with(model: event, html: { class: 'needs-validation', novalidate: true }) do |form| %>
   <% if event.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger" role="alert">
       <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
-
       <ul>
         <% event.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,36 +10,39 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="form-group mb-3">
+    <%= form.label :title, class: 'form-label' %>
+    <%= form.text_field :title, class: 'form-control' %>
   </div>
 
-  <div>
-    <%= form.label :time, style: "display: block" %>
-    <%= form.datetime_field :time %>
+  <div class="form-group mb-3">
+    <%= form.label :time, class: 'form-label' %>
+    <%= form.datetime_field :time, class: 'form-control' %>
   </div>
 
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.number_field :price %>
+  <div class="form-group mb-3">
+    <%= form.label :price, class: 'form-label' %>
+    <%= form.number_field :price, class: 'form-control' %>
   </div>
 
-  <div>
-    <%= form.label :bio, style: "display: block" %>
-    <%= form.text_field :bio %>
+  <div class="form-group mb-3">
+    <%= form.label :bio, class: 'form-label' %>
+    <%= form.text_field :bio, class: 'form-control' %>
   </div>
 
-  <div>
-    <%= form.label :venue_name, style: "display: block" %>
-    <%= form.select :venue_id, options_for_select(Venue.pluck(:name, :id), @event.venue_id) %>
+  <div class="form-group mb-3">
+    <%= form.label :venue_name, class: 'form-label' %>
+    <%= form.select :venue_id, options_for_select(current_user.own_venues.pluck(:name, :id), @event.venue_id), {}, { class: 'form-select' } %>
   </div>
 
-  <%= form.hidden_field :promoter_id, :value => current_user.id%>
+  <div class="form-group mb-3">
+    <%= form.label :image_url, class: 'form-label' %>
+    <%= form.text_field :image_url, class: 'form-control', placeholder: "http://example.com/image.jpg" %>
+  </div>
 
-  <div>
+  <%= form.hidden_field :promoter_id, value: current_user.id %>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-group text-center">
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
