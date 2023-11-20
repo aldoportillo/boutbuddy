@@ -9,6 +9,8 @@ gem "nokogiri"
 
 # User Profiles
 
+gem "ransack"
+
 gem "devise"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
