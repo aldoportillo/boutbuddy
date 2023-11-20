@@ -448,6 +448,7 @@ DEPENDENCIES
   rails-erd
   rails_db
   rails_live_reload
+  ransack
   redis (~> 4.0)
   rspec-html-matchers
   rspec-rails (~> 6.0.0)

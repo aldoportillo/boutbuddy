@@ -1,22 +1,11 @@
-<div id="<%= dom_id venue %>">
-  <p>
-    <strong>Name:</strong>
-    <%= venue.name %>
-  </p>
-
-  <p>
-    <strong>Address:</strong>
-    <%= venue.address %>
-  </p>
-
-  <p>
-    <strong>Lat:</strong>
-    <%= venue.lat %>
-  </p>
-
-  <p>
-    <strong>Lng:</strong>
-    <%= venue.lng %>
-  </p>
-
+<div class="col-md-4 mb-4" id="<%= dom_id venue %>">
+  <div class="card h-100">
+    <div class="card-body">
+      <h5 class="card-title"><%= venue.name %></h5>
+      <p class="card-text"><%= venue.address %></p>
+    </div>
+    <div class="card-footer">
+      <%= link_to "Show this venue", venue, class: "btn btn-primary" %>
+    </div>
+  </div>
 </div>

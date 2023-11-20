@@ -1,35 +1,18 @@
-<div id="<%= dom_id event %>">
-  <p>
-    <strong>Title:</strong>
-    <%= event.title %>
-  </p>
-
-  <p>
-    <strong>Date:</strong>
-    <%= event.time.strftime("%a, %b %e, %Y") %>
-  </p>
-
-  <p>
-    <strong>Time:</strong>
-    <%= event.time.strftime("%l:%M %p") %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= event.price %>
-  </p>
-
-  <p>
-    <strong>Bio:</strong>
-    <%= event.bio %>
-  </p>
-
-  <p>
-    <strong>Venue:</strong>
-    <!--Get Params from here to fetch GMAPS API-->
-    <%= event.venue.name %>
-  </p>
-
-  
-
+<div class="col-md-4 col-sm-6 mb-4" id="<%= dom_id event %>">
+  <div class="card">
+    <img class="card-img-top" src="path_to_event_image.jpg" alt="<%= event.title %> image">
+    <div class="card-body">
+      <h5 class="card-title"><%= event.title %></h5>
+      <p class="card-text"><%= event.bio %></p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Date:</strong> <%= event.time.strftime("%a, %b %e, %Y") %></li>
+        <li class="list-group-item"><strong>Time:</strong> <%= event.time.strftime("%l:%M %p") %></li>
+        <li class="list-group-item"><strong>Price:</strong> <%= event.price %></li>
+        <li class="list-group-item"><strong>Venue:</strong> <%= event.venue.name %></li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <%= link_to "Show this event", event, class: "btn btn-primary" %>
+    </div>
+  </div>
 </div>

@@ -1,7 +1,10 @@
 class UserController < ApplicationController
 
   def index
-    @users = User.where(:role => "fighter")
+    
+
+    @q = User.where(:role => "fighter").order(:last_name).ransack(params[:q])
+    @users = @q.result
     render "users/index"
     
   end

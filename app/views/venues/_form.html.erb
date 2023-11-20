@@ -1,8 +1,7 @@
-<%= form_with(model: venue) do |form| %>
+<%= form_with(model: venue, html: { class: 'needs-validation', novalidate: true }) do |form| %>
   <% if venue.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger" role="alert">
       <h2><%= pluralize(venue.errors.count, "error") %> prohibited this venue from being saved:</h2>
-
       <ul>
         <% venue.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,32 +10,31 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name, placeholder:"MGM Grand Hotel" %>
+  <div class="form-group mb-3">
+    <%= form.label :name, class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control', placeholder: "MGM Grand Hotel" %>
   </div>
 
-  <%
-=begin %>
-  <div>
-    <%= form.label :lat, style: "display: block" %>
-    <%= form.text_field :lat %>
-  </#div>
-
-  <div>
-    <%= form.label :lng, style: "display: block" %>
-    <%= form.text_field :lng %>
-  </div>
-  <%
-=end %>
-  <div>
-    <%= form.label :address %>
-    <%= form.text_field :address, placeholder: "3799 S Las Vegas Blvd, Las Vegas, NV, 89109"%>
+  <!--
+  <div class="form-group mb-3">
+    <%= form.label :lat, class: 'form-label' %>
+    <%= form.text_field :lat, class: 'form-control' %>
   </div>
 
-    <%= form.hidden_field :promoter_id, :value => current_user.id%>
+  <div class="form-group mb-3">
+    <%= form.label :lng, class: 'form-label' %>
+    <%= form.text_field :lng, class: 'form-control' %>
+  </div>
+  -->
 
-  <div>
-    <%= form.submit %>
+  <div class="form-group mb-3">
+    <%= form.label :address, class: 'form-label' %>
+    <%= form.text_field :address, class: 'form-control', placeholder: "3799 S Las Vegas Blvd, Las Vegas, NV, 89109" %>
+  </div>
+
+  <%= form.hidden_field :promoter_id, value: current_user.id %>
+
+  <div class="form-group">
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

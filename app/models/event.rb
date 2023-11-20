@@ -23,6 +23,10 @@ class Event < ApplicationRecord
   #   User.where(id: fighters_ids)
   # end
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["time", "price"]
+  end
+
   has_many :messages, class_name: "Message", foreign_key: "event_id"
 
 

@@ -62,6 +62,9 @@ class User < ApplicationRecord
         .where(weight_class_id: self.weight_class_id)
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["username"]
+  end
 
   private
   
