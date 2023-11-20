@@ -4,9 +4,13 @@
   <h2 class="col">Events</h2>
   <% if current_user&.role == "promoter" %>
     <%= link_to 'New Event', new_event_path, class: 'btn btn-primary col-auto' %>
+  <% elsif current_user&.role == "fighter" %>
+    <%= sort_link(@q, :time, "time", class: "col-auto") %>
+  <% else %>
+    <%= sort_link(@q, :time, "time", class: "col-auto") %>
+    <%= sort_link(@q, :price, "price", class: "col-auto") %> 
   <% end %>
 </div>
-
 
 <div class="container" id="events">
   <div class="row">
