@@ -1,3 +1,17 @@
+<div class="row justify-content-between align-items-center">
+  <h2 class="col-auto">Fighters</h2>
+  
+  <%= search_form_for @q, class: 'col-auto' do |form| %>
+    <div class="input-group">
+      <%= form.text_field :username_cont, placeholder: "name", aria_label: "Search", class: "form-control" %>
+      <div class="input-group-append">
+        <%= form.submit "Search", class: "btn btn-outline-success" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
 <div class="container mt-5">
   <div class="row">
     <% @users.each do |user| %>
