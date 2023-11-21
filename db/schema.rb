@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_17_162817) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_21_171401) do
   create_table "bouts", force: :cascade do |t|
     t.integer "event_id"
     t.integer "weight_class_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_17_162817) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "promoter_id"
+    t.string "photo"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -61,7 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_17_162817) do
     t.datetime "remember_created_at"
     t.string "first_name"
     t.string "last_name"
-    t.string "photo_url"
+    t.string "photo"
     t.integer "weight"
     t.integer "reach"
     t.integer "height"
