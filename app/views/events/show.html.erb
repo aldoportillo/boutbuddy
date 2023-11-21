@@ -40,6 +40,11 @@
   <% @event.messages.each do |message| %>
 
     <%= render partial:"shared/message", locals: { message: message} %>
+
+  <% end %>
+
+  <% if user_signed_in? && @event.fighters.include?(current_user)%>
+   <%= render partial:"messages/form", locals: { event: @event, message: @message } %>
   <% end %>
   
 <div>
