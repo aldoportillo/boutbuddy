@@ -24,7 +24,7 @@ Marketing this product will be difficult but adaption of it will grow the sport.
 - first_name
 - last_name
 - password
-- photo_url
+- photo
 - weight
 - reach
 - height

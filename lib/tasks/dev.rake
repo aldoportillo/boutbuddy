@@ -39,7 +39,7 @@ task({ :sample_data => :environment }) do
     user = User.new
     user.first_name = row[0].split.at(0)
     user.last_name = row[0].split.at(1)
-    user.photo_url = row[1]
+    user.photo = row[1]
     user.reach = row[3]
     user.height = row[4]
     user.weight = row[5]
@@ -59,7 +59,7 @@ task({ :sample_data => :environment }) do
   user.email = "cage-rage@mma.com"
   user.password = "password"
   user.username = "cage-rage"
-  user.photo_url = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/027/6ac3bb5e647003418405493cdcf3ae61_crop_exact.jpg"
+  user.photo = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/027/6ac3bb5e647003418405493cdcf3ae61_crop_exact.jpg"
   user.role = "promoter"
   user.save
 
@@ -72,7 +72,7 @@ task({ :sample_data => :environment }) do
   user.email = "king-cage@mma.com"
   user.password = "password"
   user.username = "king-cage"
-  user.photo_url = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/028/440a28f3a80ff916053d2d3d1ce22f0c_crop_exact.jpg"
+  user.photo = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/028/440a28f3a80ff916053d2d3d1ce22f0c_crop_exact.jpg"
   user.role = "promoter"
   user.save
 
@@ -85,7 +85,7 @@ task({ :sample_data => :environment }) do
   user.email = "bellator@mma.com"
   user.password = "password"
   user.username = "bellator"
-  user.photo_url = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/031/61a46750e6d1fc750ccdfd814d02d5ec_crop_exact.jpg"
+  user.photo = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/031/61a46750e6d1fc750ccdfd814d02d5ec_crop_exact.jpg"
   user.role = "promoter"
   user.save
 
@@ -98,7 +98,7 @@ task({ :sample_data => :environment }) do
   user.email = "strike-force@mma.com"
   user.password = "password"
   user.username = "strike-force"
-  user.photo_url = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/032/1798cc866e656bfb7d7a196f16f4de86_crop_exact.jpg"
+  user.photo = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/032/1798cc866e656bfb7d7a196f16f4de86_crop_exact.jpg"
   user.role = "promoter"
   user.save
 
@@ -111,7 +111,7 @@ task({ :sample_data => :environment }) do
   user.email = "one-fc@mma.com"
   user.password = "password"
   user.username = "one-fc"
-  user.photo_url = "https://mma.prnewswire.com/media/814161/ONE_Championship_black_logo_sq_Logo.jpg?p=facebook"
+  user.photo = "https://mma.prnewswire.com/media/814161/ONE_Championship_black_logo_sq_Logo.jpg?p=facebook"
   user.role = "promoter"
   user.save
   pp "There are now #{User.count} users."
