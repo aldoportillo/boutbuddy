@@ -2,19 +2,20 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: your_postgres_username
-  password: <%= ENV['YOUR_DATABASE_PASSWORD'] %>
-  host: localhost
-development:
-  <<: *default
-  database: your_application_development
 
+development:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
 test:
-  <<: *default
-  database: your_application_test
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
 
 production:
   <<: *default
-  database: your_application_production
-  username: your_production_postgres_username
-  password: <%= ENV['YOUR_PRODUCTION_DATABASE_PASSWORD'] %>
+  database: rails_template_production
+  username: rails_template
+  password: <%= ENV["RAILS_TEMPLATE_DATABASE_PASSWORD"] %>
