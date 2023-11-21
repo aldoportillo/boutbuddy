@@ -2,7 +2,7 @@
 #
 # Table name: weight_classes
 #
-#  id         :integer          not null, primary key
+#  id         :bigint           not null, primary key
 #  max        :float
 #  min        :float
 #  name       :string
