@@ -4,18 +4,15 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  <<: *default
+  database: bout_buddy_development
+
 test:
-  adapter: sqlite3
-  database: db/test.sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  <<: *default
+  database: bout_buddy_test
 
 production:
   <<: *default
-  database: rails_template_production
-  username: rails_template
-  password: <%= ENV["RAILS_TEMPLATE_DATABASE_PASSWORD"] %>
+  database: bout_buddy_production
+  username: bout_buddy_board
+  password: <%= ENV["BOUT_BUDDY_DATABASE_PASSWORD"] %>
