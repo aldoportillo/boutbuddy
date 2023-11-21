@@ -37,6 +37,11 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
+    if params[:event][:photo].present?
+      uploaded_image = Cloudinary::Uploader.upload(params[:event][:photo], folder: "boutbuddy/events")
+      @event.photo = uploaded_image['secure_url']
+    end
+
     respond_to do |format|
       if @event.save
         format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
@@ -50,8 +55,20 @@ class EventsController < ApplicationController
 
   # PATCH/PUT /events/1 or /events/1.json
   def update
+
+    @event = Event.find(params[:id])
+
+    if params[:event][:photo].present?
+      uploaded_image = Cloudinary::Uploader.upload(params[:event][:photo], folder: "boutbuddy/events")
+
+      debugger
+      @event.photo = uploaded_image['secure_url']
+      debugger
+    end
+    
     respond_to do |format|
       if @event.update(event_params)
+        debugger
         format.html { redirect_to event_url(@event), notice: "Event was successfully updated." }
         format.json { render :show, status: :ok, location: @event }
       else

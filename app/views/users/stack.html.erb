@@ -5,7 +5,7 @@
     <div class="fighter_card">
       <%= bout.event.title %>
       <h2><%= bout.red_corner_fighter.first_name %> <%= bout.red_corner_fighter.last_name %></h2> 
-      <%= image_tag bout.red_corner_fighter.photo_url, class: "fighter_image", alt: "#{bout.red_corner_fighter.username}-photo" %>
+      <%= image_tag bout.red_corner_fighter.photo, class: "fighter_image", alt: "#{bout.red_corner_fighter.username}-photo" %>
       
     </div>
     <% end %>

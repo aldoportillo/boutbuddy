@@ -4,6 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  bio         :string
+#  photo       :string
 #  price       :integer
 #  time        :datetime
 #  title       :string

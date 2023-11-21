@@ -8,7 +8,7 @@
 #  first_name             :string
 #  height                 :integer
 #  last_name              :string
-#  photo_url              :string
+#  photo                  :string
 #  reach                  :integer
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime

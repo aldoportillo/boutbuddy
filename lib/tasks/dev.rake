@@ -39,7 +39,7 @@ task({ :sample_data => :environment }) do
     user = User.new
     user.first_name = row[0].split.at(0)
     user.last_name = row[0].split.at(1)
-    user.photo_url = row[1]
+    user.photo = row[1]
     user.reach = row[3]
     user.height = row[4]
     user.weight = row[5]
@@ -59,7 +59,7 @@ task({ :sample_data => :environment }) do
   user.email = "cage-rage@mma.com"
   user.password = "password"
   user.username = "cage-rage"
-  user.photo_url = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/027/6ac3bb5e647003418405493cdcf3ae61_crop_exact.jpg"
+  user.photo = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/027/6ac3bb5e647003418405493cdcf3ae61_crop_exact.jpg"
   user.role = "promoter"
   user.save
 
@@ -72,7 +72,7 @@ task({ :sample_data => :environment }) do
   user.email = "king-cage@mma.com"
   user.password = "password"
   user.username = "king-cage"
-  user.photo_url = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/028/440a28f3a80ff916053d2d3d1ce22f0c_crop_exact.jpg"
+  user.photo = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/028/440a28f3a80ff916053d2d3d1ce22f0c_crop_exact.jpg"
   user.role = "promoter"
   user.save
 
@@ -85,7 +85,7 @@ task({ :sample_data => :environment }) do
   user.email = "bellator@mma.com"
   user.password = "password"
   user.username = "bellator"
-  user.photo_url = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/031/61a46750e6d1fc750ccdfd814d02d5ec_crop_exact.jpg"
+  user.photo = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/031/61a46750e6d1fc750ccdfd814d02d5ec_crop_exact.jpg"
   user.role = "promoter"
   user.save
 
@@ -98,7 +98,7 @@ task({ :sample_data => :environment }) do
   user.email = "strike-force@mma.com"
   user.password = "password"
   user.username = "strike-force"
-  user.photo_url = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/032/1798cc866e656bfb7d7a196f16f4de86_crop_exact.jpg"
+  user.photo = "https://media.bleacherreport.com/w_800,h_533,c_fill/br-img-slides/003/667/032/1798cc866e656bfb7d7a196f16f4de86_crop_exact.jpg"
   user.role = "promoter"
   user.save
 
@@ -111,7 +111,7 @@ task({ :sample_data => :environment }) do
   user.email = "one-fc@mma.com"
   user.password = "password"
   user.username = "one-fc"
-  user.photo_url = "https://mma.prnewswire.com/media/814161/ONE_Championship_black_logo_sq_Logo.jpg?p=facebook"
+  user.photo = "https://mma.prnewswire.com/media/814161/ONE_Championship_black_logo_sq_Logo.jpg?p=facebook"
   user.role = "promoter"
   user.save
   pp "There are now #{User.count} users."
@@ -134,7 +134,8 @@ task({ :sample_data => :environment }) do
   #Generating Events
   pp "Generating Events"
 
-  
+  event_images = ["https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588433/boutbuddy/assets/sample_data/events/ih0zlyin1eeejnmrgkro.avif", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588433/boutbuddy/assets/sample_data/events/yram0bszpcbpsl5d8dbd.avif", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588433/boutbuddy/assets/sample_data/events/eogw5jzi7n5vhitynsud.avif", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588433/boutbuddy/assets/sample_data/events/gufe40oyt6nmxuyaoacz.avif", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588433/boutbuddy/assets/sample_data/events/txbblmo0km5crmkt63cm.avif", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588434/boutbuddy/assets/sample_data/events/vxqpsqtld01yjcr0dmig.webp", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588434/boutbuddy/assets/sample_data/events/lk2bnpgpg7vrktekexjn.webp", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588434/boutbuddy/assets/sample_data/events/bvpwhmpxqwpyid6hzdsd.avif", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588434/boutbuddy/assets/sample_data/events/x6lannsujim4tjp4oy5v.webp", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588434/boutbuddy/assets/sample_data/events/nxji0ggih8bun9ydyvwb.avif", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588435/boutbuddy/assets/sample_data/events/my2cl5iujy0mxyqb17lq.avif", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588435/boutbuddy/assets/sample_data/events/yvbl3cw8bp9ke4nxiwsa.jpg", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588435/boutbuddy/assets/sample_data/events/c1zfnbxqjztw6wr2uczn.avif", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588436/boutbuddy/assets/sample_data/events/momqburgtk69i8ixitrn.webp", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588436/boutbuddy/assets/sample_data/events/w69w8nzu9pgfzr9iozxk.avif", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588436/boutbuddy/assets/sample_data/events/xr81mmxoxtwlalysoqv4.webp", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588436/boutbuddy/assets/sample_data/events/sdmnf3uxdv4cdrlxwbqk.webp", "https://res.cloudinary.com/dkhtrg1ts/image/upload/v1700588436/boutbuddy/assets/sample_data/events/ritmdug4ygfdmk5zkmac.avif"]
+
   CSV.foreach('lib/sample_data/events.csv', :headers => true) do |row|
     event = Event.new
     event.title = row[0]
@@ -142,6 +143,7 @@ task({ :sample_data => :environment }) do
     event.time = rand(2.years).seconds.from_now
     event.price = rand(15..45)
     event.venue_id = Venue.all.sample.id
+    event.photo = event_images.sample
     event.promoter_id = User.where(:role => "promoter").sample.id
     event.save!
   end
