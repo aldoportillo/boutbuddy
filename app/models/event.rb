@@ -2,7 +2,7 @@
 #
 # Table name: events
 #
-#  id          :integer          not null, primary key
+#  id          :bigint           not null, primary key
 #  bio         :string
 #  photo       :string
 #  price       :integer
