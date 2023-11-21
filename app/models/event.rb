@@ -19,10 +19,7 @@ class Event < ApplicationRecord
 
   has_many :bouts, class_name: "Bout", foreign_key: "event_id"
 
-  # def fighters
-  #   fighters_ids = bouts.pluck(:red_corner_id, :blue_corner_id).flatten.uniq
-  #   User.where(id: fighters_ids)
-  # end
+  has_many :fighters, through: :bouts
 
   def self.ransackable_attributes(auth_object = nil)
     ["time", "price"]
