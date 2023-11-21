@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  resources :messages
+  
   resources :weight_classes
   
   resources :venues
   resources :events do
     resources :bouts
+    resources :messages
   end
   devise_for :users, controllers: { registrations: 'users/registrations' }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
