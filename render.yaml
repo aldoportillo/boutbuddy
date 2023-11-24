@@ -1,7 +1,7 @@
 databases:
-  - name: bout-buddy
-    databaseName: bout-buddy
-    user: bout-buddy
+  - name: boutbuddy
+    databaseName: boutbuddy
+    user: boutbuddy
 
 services:
   - type: web
