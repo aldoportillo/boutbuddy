@@ -7,4 +7,4 @@ services:
     startCommand: "./bin/render-start.sh"
     envVars: # this section sets some ENV variables needed by Render for deployment
       - key: SECRET_KEY_BASE
-        generateValue: true
+        generateValue: false

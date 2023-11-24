@@ -15,4 +15,4 @@ production:
   <<: *default
   database: bout_buddy_production
   username: bout_buddy_board
-  password: <%= ENV["BOUT_BUDDY_DATABASE_PASSWORD"] %>
+  password: <%= ENV["DATABASE_URL"] %>
