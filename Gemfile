@@ -5,6 +5,7 @@ ruby "3.2.1"
 
 gem "ransack"
 gem "cloudinary"
+gem "httparty"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 gem "sprockets-rails"
 
@@ -61,7 +62,7 @@ group :development do
   gem "rails_live_reload"
 
   gem "nokogiri"
-  gem "httparty"
+  
 end
 
 group :test do
