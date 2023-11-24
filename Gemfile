@@ -6,6 +6,7 @@ ruby "3.2.1"
 gem "ransack"
 gem "cloudinary"
 gem "httparty"
+gem "simple_form"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 gem "sprockets-rails"
 
