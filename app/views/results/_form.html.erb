@@ -1,0 +1,29 @@
+<%= form_with(model: [event, bout, result], local: true) do |form| %>
+  <% if result.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(result.errors.count, "error") %> prohibited this result from being saved:</h2>
+
+      <ul>
+        <% result.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :winner_id, "Winner" %>
+    <%= form.select :winner_id, 
+                    bout.participations.pluck(:user_id).map { |id| [User.find(id).username, id] },
+                    { include_blank: true } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :win_by, "Win By" %>
+    <%= form.text_field :win_by %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
