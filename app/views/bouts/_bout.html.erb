@@ -13,6 +13,8 @@
 
   <!-- Bout Weight Class -->
   <h3 class="align-self-center mb-0"><%= bout.weight_class.name %></h3>
+  <% new_result = Result.new %>
+  <%= render 'results/form', result: new_result, event: @event, bout: bout %>
 
   <!-- Blue Corner Fighter -->
   <div class="d-flex align-items-center">
@@ -25,4 +27,5 @@
     </div>
     <img src="<%= bout.blue_corner_fighter.photo %>" class="rounded-circle" style="width:100px; height: 100px; object-fit: cover; object-position: 0 0;">
   </div>
+
 </div>
