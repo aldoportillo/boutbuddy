@@ -23,6 +23,6 @@ class ResultsController < ApplicationController
   end
 
   def result_params
-    params.require(:result).permit(:winner_id, :victory_method, :submission_type)
+    params.require(:result).permit(:winner_id, :win_by)
   end
 end
