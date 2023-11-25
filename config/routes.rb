@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   
   resources :venues
   resources :events do
-    resources :bouts
+    resources :bouts do
+      resources :results, only: [:new, :create]
+    end
     resources :messages
   end
   devise_for :users, controllers: { registrations: 'users/registrations' }
