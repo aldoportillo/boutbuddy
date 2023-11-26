@@ -16,6 +16,8 @@
 class Event < ApplicationRecord
 
   belongs_to :venue
+  belongs_to :promoter, class_name: :User, foreign_key: :promoter_id
+  
 
   has_many :bouts, class_name: "Bout", foreign_key: "event_id"
 
