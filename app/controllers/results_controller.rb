@@ -6,7 +6,7 @@ class ResultsController < ApplicationController
   end
 
   def create
-    @result = @bout.result.build(result_params)
+    @result = @bout.build_result(result_params)
 
     if @result.save
       redirect_to event_path(@event), notice: 'Result was successfully created.'

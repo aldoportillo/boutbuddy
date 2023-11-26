@@ -41,6 +41,11 @@ class User < ApplicationRecord
   has_many :participations
   has_many :bouts, through: :participations
   has_many :events, -> { distinct }, through: :bouts
+  
+  #Here we have a direct relationship to Results
+  #We can Scope this to bouts as well if we need to later but maybe not since we only want stats
+  #If we do, we will need to update name wins everywhere before we do.
+  has_many :wins, class_name: :Result, foreign_key: :winner_id
 
 
   # Swipes relationships
