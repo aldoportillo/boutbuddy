@@ -11,6 +11,7 @@
 class Bout < ApplicationRecord
 
   belongs_to :event
+  has_one :result
 
   has_many :participations
   has_many :fighters, through: :participations, source: :user

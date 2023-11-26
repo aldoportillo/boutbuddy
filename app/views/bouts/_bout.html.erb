@@ -15,9 +15,9 @@
   
   <div class="col-md-6 align-self-center">
     <h3><%= bout.weight_class.name %></h3>
-    <% if current_user == bout.event.promoter  && %>
-      <% new_result = Result.new %>
-      <%= render 'results/form', result: new_result, event: @event, bout: bout %>
+    <% if current_user == bout.event.promoter && !bout.result %>
+      <% @result = Result.new %>
+      <%= render 'results/form', result: @result, event: @event, bout: bout %>
     <% end %>
   </div>
 
