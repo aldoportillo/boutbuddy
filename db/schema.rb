@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_25_215525) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_27_003138) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_25_215525) do
   create_table "results", force: :cascade do |t|
     t.bigint "bout_id", null: false
     t.integer "winner_id"
-    t.string "win_by"
+    t.integer "win_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bout_id"], name: "index_results_on_bout_id"
@@ -101,6 +101,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_25_215525) do
     t.string "name"
     t.float "min"
     t.float "max"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "win_bies", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

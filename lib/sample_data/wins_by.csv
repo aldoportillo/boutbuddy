@@ -1,0 +1,46 @@
+id,name,type
+1,Unanimous,Decision 
+2,Split,Decision 
+3,Referee Stoppage,TKO
+4,Knock Out,TKO
+5,Doctor Stoppage,TKO
+6,Rear Naked Choke,Submission
+7,Armbar,Submission
+8,Heel Hook,Submission
+9,Arm Triangle,Submission
+10,Triangle,Submission
+11,Arm In Guillotine,Submission
+12,Kimura,Submission
+13,Americana,Submission
+14,Guillotine,Submission
+15,D'arce,Submission
+16,Anaconda,Submission
+17,Knee Bar,Submission
+18,Twister,Submission
+19,Calf Slicer,Submission
+20,Von-Flu,Submission
+21,Omaplata,Submission
+22,Banana Split,Submission
+23,Toe Hold,Submission
+24,Buggy Choke,Submission
+25,Wristlock,Submission
+26,Ankle Lock,Submission
+27,Bulldog Choke,Submission
+28,Mother's Milk,Submission
+29,Ham Sandwich,Submission
+30,Body Triangle,Submission
+31,Tarikoplata,Submission
+32,Electric Chair,Submission
+33,Ezekiel,Submission
+34,North South Choke,Submission
+35,Baseball Bat Choke,Submission
+36,Bicep Slicer,Submission
+37,Gogoplata,Submission
+38,Kesagatame Crush,Submission
+39,Clock Choke,Submission
+40,Crucifix,Submission
+41,Peruvian Neck Tie,Submission
+42,Dead Orchard,Submission
+43,Japanese Neck Tie,Submission
+44,Inverted Triangle,Submission
+45,Disqualification ,DQ
