@@ -11,6 +11,7 @@ task({ :sample_data => :environment }) do
     Venue.destroy_all
     WeightClass.destroy_all
     Event.destroy_all
+    Result.destroy_all
     Bout.destroy_all
     Message.destroy_all
     Swipe.destroy_all
@@ -139,7 +140,7 @@ task({ :sample_data => :environment }) do
 
   CSV.foreach('lib/sample_data/events.csv', :headers => true) do |row|
     event = Event.new
-    event.title = row[0]
+    event.title = "#{row[0]} #2"
     event.bio = row[1]
     event.time = rand(2.years).seconds.from_now
     event.price = rand(15..45)
@@ -225,4 +226,62 @@ task({ :sample_data => :environment }) do
   end
 
   pp "There are now #{WinBy.count} methods of winning."
+
+  #### Generating Past Events #####
+
+  # Generating Past Events
+  CSV.foreach('lib/sample_data/events.csv', :headers => true) do |row|
+    event = Event.new
+    event.title = row[0]
+    event.bio = row[1]
+    event.time = rand(2.years).seconds.ago
+    event.price = rand(15..45)
+    event.venue_id = Venue.all.sample.id
+    event.photo = event_images.sample
+    event.promoter_id = User.where(:role => "promoter").sample.id
+    event.save!
+  end
+  pp "Past Events were generated"
+
+  # Generating Swipes
+  User.find_each do |user|
+    eligible_users = User.where(weight_class_id: user.weight_class_id).where.not(id: user.id)
+
+    eligible_users.find_each do |other_user|
+      Swipe.create!(
+        swiper_id: user.id,
+        swiped_id: other_user.id,
+        like: true
+      )
+    end
+  end
+
+  pp "Past Swipes were generated"
+
+  # Generating Bouts from Swipes
+  Swipe.where(like: true).find_each do |swipe|
+    if Swipe.exists?(swiper_id: swipe.swiped_id, swiped_id: swipe.swiper_id, like: true)
+      existing_bouts = Bout.joins(:participations).where(participations: { user_id: [swipe.swiper_id, swipe.swiped_id] })
+      unless existing_bouts.exists?
+        bout = Bout.create!(
+          event: Event.where("time < ?", Time.now).order("RANDOM()").first,
+          weight_class_id: User.find(swipe.swiper_id).weight_class_id
+        )
+    
+        if bout.persisted?
+          Participation.create!(bout: bout, user_id: swipe.swiper_id, corner: 'red')
+          Participation.create!(bout: bout, user_id: swipe.swiped_id, corner: 'blue')
+
+          # Generating Result for Bout
+          Result.create!(
+            bout_id: bout.id,
+            winner_id: [swipe.swiper_id, swipe.swiped_id].sample,
+            win_by_id: WinBy.all.sample.id
+          )
+        end
+      end
+    end
+  end
+
+  pp "Past Bouts with results were generated"
 end

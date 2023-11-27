@@ -11,13 +11,25 @@
         <p class="fs-5">Height: <%= @user.height %></p>
         <h3 class="mt-4">Upcoming Bouts</h3>
         <% @user.bouts.each do |bout| %>
-          <%= link_to event_path(bout.event.id), class: 'text-decoration-none' do %>
-            <div class="bout_info p-2 my-2 bg-light border rounded">
-              <%= bout.event.title %>
-            </div>
+          <% if bout.event.time.future? %>
+            <%= link_to event_path(bout.event.id), class: 'text-decoration-none' do %>
+              <div class="bout_info p-2 my-2 bg-light border rounded">
+                <%= bout.event.title %>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
+
         <h3 class="mt-4">Previous Bouts</h3>
+        <% @user.bouts.each do |bout| %>
+          <% if bout.event.time.past? %>
+            <%= link_to event_path(bout.event.id), class: 'text-decoration-none' do %>
+              <div class="bout_info p-2 my-2 bg-light border rounded">
+                <%= bout.event.title %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
