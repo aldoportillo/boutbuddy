@@ -220,7 +220,7 @@ task({ :sample_data => :environment }) do
     win_by = WinBy.new
     win_by.id = row[0]
     win_by.name = row[1]
-    win_by.type = row[2]
+    win_by.description = row[2]
     win_by.save
   end
 
