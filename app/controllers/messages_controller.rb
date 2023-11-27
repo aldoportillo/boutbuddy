@@ -9,7 +9,6 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.turbo_stream { render partial: 'messages/content', locals: { messages: @messages } }
     end
   end
 
