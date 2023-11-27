@@ -6,6 +6,11 @@ class BoutsController < ApplicationController
   def index
     #@bouts = Bout.all
     @bouts = @event.bouts
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream { render partial: 'bouts/content', locals: { bouts: @bouts } }
+    end
   end
 
   # GET /bouts/1 or /bouts/1.json

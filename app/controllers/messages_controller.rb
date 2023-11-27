@@ -1,9 +1,16 @@
 class MessagesController < ApplicationController
+  before_action :set_event
   before_action :set_message, only: %i[ show edit update destroy ]
 
   # GET /messages or /messages.json
   def index
     @messages = Message.all
+    @message = Message.new
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream { render partial: 'messages/content', locals: { messages: @messages } }
+    end
   end
 
   # GET /messages/1 or /messages/1.json
@@ -25,10 +32,10 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to event_url(message_params["event_id"]), notice: "Message was successfully created." }
+        format.html { redirect_to event_messages_path(message_params["event_id"]), notice: "Message was successfully created." }
         format.json { render :show, status: :created, location: @message }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to event_messages_path(message_params["event_id"]), notice: "Error Sending Message." }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
@@ -61,6 +68,10 @@ class MessagesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_message
       @message = Message.find(params[:id])
+    end
+    
+    def set_event
+      @event = Event.find(params[:event_id])
     end
 
     # Only allow a list of trusted parameters through.

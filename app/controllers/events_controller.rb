@@ -22,7 +22,7 @@ class EventsController < ApplicationController
 
   # GET /events/1 or /events/1.json
   def show
-    @message = Message.new
+    @bouts = @event.bouts
   end
 
   # GET /events/new
@@ -86,6 +86,26 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to events_url, notice: "Event was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def bouts
+    @event = Event.find(params[:id])
+    @bouts = @event.bouts
+  
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
+  end
+  
+  def messages
+    @event = Event.find(params[:id])
+    @messages = @event.messages
+  
+    respond_to do |format|
+      format.html
+      format.turbo_stream
     end
   end
 
