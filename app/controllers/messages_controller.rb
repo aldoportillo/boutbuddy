@@ -27,10 +27,10 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to event_url(message_params["event_id"]), notice: "Message was successfully created." }
+        format.html { redirect_to event_messages_path(message_params["event_id"]), notice: "Message was successfully created." }
         format.json { render :show, status: :created, location: @message }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to event_messages_path(message_params["event_id"]), notice: "Error Sending Message." }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
