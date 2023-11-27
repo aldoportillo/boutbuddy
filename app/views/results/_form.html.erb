@@ -21,7 +21,10 @@
 
     <div class="form-group col-md-6">
       <%= form.label :win_by, "Win By", class: 'control-label' %>
-      <%= form.text_field :win_by, class: 'form-control' %>
+      <%= form.select :win_by, 
+                      WinBy.order(name: :asc).map { |win_by| ["#{win_by.name} - #{win_by.description}", win_by.id] },
+                      { include_blank: true },
+                      { class: 'form-control' } %>
     </div>
   </div>
 
