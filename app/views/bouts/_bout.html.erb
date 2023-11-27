@@ -19,7 +19,7 @@
       <% @result = Result.new %>
       <%= render 'results/form', result: @result, event: @event, bout: bout %>
       <% elsif bout.result %>
-      <%= bout.result.win_by %>
+      <%= "#{WinBy.find(bout.result.win_by_id).name} - #{WinBy.find(bout.result.win_by_id).description}" %>
     <% end %>
   </div>
 

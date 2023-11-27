@@ -20,8 +20,8 @@
     </div>
 
     <div class="form-group col-md-6">
-      <%= form.label :win_by, "Win By", class: 'control-label' %>
-      <%= form.select :win_by, 
+      <%= form.label :win_by_id, "Win By", class: 'control-label' %>
+      <%= form.select :win_by_id, 
                       WinBy.order(name: :asc).map { |win_by| ["#{win_by.name} - #{win_by.description}", win_by.id] },
                       { include_blank: true },
                       { class: 'form-control' } %>

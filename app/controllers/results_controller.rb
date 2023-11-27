@@ -11,7 +11,7 @@ class ResultsController < ApplicationController
     if @result.save
       redirect_to event_path(@event), notice: 'Result was successfully created.'
     else
-      render :new
+      redirect_to event_path(@event), notice: 'There was an issue saving this result.'
     end
   end
 
@@ -23,6 +23,6 @@ class ResultsController < ApplicationController
   end
 
   def result_params
-    params.require(:result).permit(:winner_id, :win_by)
+    params.require(:result).permit(:winner_id, :win_by_id)
   end
 end
