@@ -1,14 +1,45 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Messages</h1>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+      <img src="<%= @event.photo %>" class="img-fluid mb-4">
 
-<div id="messages">
-  <% @messages.each do |message| %>
-    <%= render partial:"shared/message", locals: { message: message} %>
-    <p>
-      <%= link_to "Show this message", message %>
-    </p>
-  <% end %>
+      <div class="d-flex justify-content-between mb-3">
+        <h2><%= @event.title %></h2>
+        <h2>$<%= @event.price %> Entry</h2>
+      </div>
+
+      <div class="d-flex justify-content-between mb-3">
+        <h3><%= @event.time.strftime("%a, %b %e, %Y") %></h3>
+        <h3><%= @event.time.strftime("%l:%M %p") %></h3>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3><%= @event.venue.name %></h3>
+        <button class="btn btn-primary">Get Directions</button>
+      </div>
+
+      <p class="mb-4"><%= @event.bio %></p>
+
+      <ul class="nav nav-pills nav-justified">
+        <li class="nav-item">
+          <%= link_to "Bouts", event_bouts_path(@event), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Messages", event_messages_path(@event), class: "nav-link" %>
+        </li>
+      </ul>
+
+      <h3>Messages</h3>
+
+      <% @event.messages.each do |message| %>
+        <%= render partial:"messages/message", locals: { message: message} %>
+      <% end %>
+
+      <% if user_signed_in? && @event.fighters.include?(current_user) %>
+        <%= render partial:"messages/form", locals: { event: @event, message: @message } %>
+      <% end %>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New message", new_message_path %>

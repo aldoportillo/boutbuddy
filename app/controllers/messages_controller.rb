@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  before_action :set_event
   before_action :set_message, only: %i[ show edit update destroy ]
 
   # GET /messages or /messages.json
@@ -61,6 +62,10 @@ class MessagesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_message
       @message = Message.find(params[:id])
+    end
+    
+    def set_event
+      @event = Event.find(params[:event_id])
     end
 
     # Only allow a list of trusted parameters through.

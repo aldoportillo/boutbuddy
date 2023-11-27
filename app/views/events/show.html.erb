@@ -20,20 +20,14 @@
 
       <p class="mb-4"><%= @event.bio %></p>
 
-      <h3 class="mb-3">Bouts</h3>
-      <% @event.bouts.each do |bout| %>
-        <%= render partial: "bouts/bout", locals: { bout: bout } %>
-      <% end %>
-
-      <h3>Messages</h3>
-
-      <% @event.messages.each do |message| %>
-        <%= render partial:"shared/message", locals: { message: message} %>
-      <% end %>
-
-      <% if user_signed_in? && @event.fighters.include?(current_user) %>
-        <%= render partial:"messages/form", locals: { event: @event, message: @message } %>
-      <% end %>
+      <ul class="nav nav-pills nav-justified">
+        <li class="nav-item">
+          <%= link_to "Bouts", event_bouts_path(@event), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Messages", event_messages_path(@event), class: "nav-link" %>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
