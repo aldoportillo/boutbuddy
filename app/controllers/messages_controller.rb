@@ -6,6 +6,11 @@ class MessagesController < ApplicationController
   def index
     @messages = Message.all
     @message = Message.new
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream { render partial: 'messages/content', locals: { messages: @messages } }
+    end
   end
 
   # GET /messages/1 or /messages/1.json

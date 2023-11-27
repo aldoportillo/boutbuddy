@@ -22,16 +22,15 @@
 
       <ul class="nav nav-pills nav-justified">
         <li class="nav-item">
-          <%= link_to "Bouts", event_bouts_path(@event), class: "nav-link active" %>
+          <%= link_to "Bouts", event_bouts_path(@event), class: "nav-link", data: { turbo_frame: "tab-content" } %>
         </li>
         <li class="nav-item">
-          <%= link_to "Messages", event_messages_path(@event), class: "nav-link" %>
+          <%= link_to "Messages", event_messages_path(@event), class: "nav-link", data: { turbo_frame: "tab-content" } %>
         </li>
       </ul>
 
-      <h3 class="mb-3">Bouts</h3>
-      <% @event.bouts.each do |bout| %>
-        <%= render partial: "bouts/bout", locals: { bout: bout } %>
+      <%= turbo_frame_tag 'tab-content' do %>
+        <%= render 'bouts/content', bouts: @event.bouts %>
       <% end %>
     </div>
   </div>
