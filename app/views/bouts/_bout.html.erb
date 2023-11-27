@@ -1,7 +1,7 @@
 <div class="bout_card d-flex justify-content-between mb-3 p-3 bg-white" id="<%= dom_id bout %>">
   <!-- Red Corner Fighter -->
   <div class="d-flex align-items-center">
-    <img src="<%= bout.red_corner_fighter.photo %>" class="rounded-circle" style="width:100px; height: 100px; object-fit: cover; object-position: 0 0;">
+    <img src="<%= bout.red_corner_fighter.photo %>" class="rounded-circle <%= (bout.result && bout.red_corner_fighter == bout.result.winner) ? 'green-circle' : '' %>" style="width:100px; height: 100px; object-fit: cover; object-position: 0 0;">
     <div class="ms-3">
       <%= link_to user_path(bout.red_corner_fighter.username) do %>
         <h4 class="mb-0"><%= bout.red_corner_fighter.first_name %> <%= bout.red_corner_fighter.last_name %></h4>
@@ -11,8 +11,18 @@
     </div>
   </div>
 
-  <!-- Bout Weight Class -->
-  <h3 class="align-self-center mb-0"><%= bout.weight_class.name %></h3>
+  <!-- Bout Weight Class and Win Form -->
+  
+  <div class="col-md-6 align-self-center">
+    <h3><%= bout.weight_class.name %></h3>
+    <% if current_user == bout.event.promoter && !bout.result %>
+      <% @result = Result.new %>
+      <%= render 'results/form', result: @result, event: @event, bout: bout %>
+      <% elsif bout.result %>
+      <%= "#{WinBy.find(bout.result.win_by_id).name} - #{WinBy.find(bout.result.win_by_id).description}" %>
+    <% end %>
+  </div>
+
 
   <!-- Blue Corner Fighter -->
   <div class="d-flex align-items-center">
@@ -23,6 +33,7 @@
       <p class="mb-0">Reach: <%= bout.blue_corner_fighter.reach %></p>
       <p class="mb-0">Height: <%= bout.blue_corner_fighter.height %></p>
     </div>
-    <img src="<%= bout.blue_corner_fighter.photo %>" class="rounded-circle" style="width:100px; height: 100px; object-fit: cover; object-position: 0 0;">
+    <img src="<%= bout.blue_corner_fighter.photo %>" class="rounded-circle <%= (bout.result && bout.blue_corner_fighter == bout.result.winner) ? 'green-circle' : '' %>" style="width:100px; height: 100px; object-fit: cover; object-position: 0 0;">
   </div>
+
 </div>
