@@ -11,6 +11,7 @@ class UserController < ApplicationController
 
   def show
     @user = User.find_by!(username: params.fetch(:username))
+    @user_wins_data = @user.win_bys.group(:name).count
     render "users/show"
   end
 

@@ -19,6 +19,7 @@
             <% end %>
           <% end %>
         <% end %>
+        
 
         <h3 class="mt-4">Previous Bouts</h3>
         <% @user.bouts.each do |bout| %>
@@ -33,4 +34,6 @@
       </div>
     </div>
   </div>
+
+  <%=  pie_chart @user_wins_data %>
 </div>
