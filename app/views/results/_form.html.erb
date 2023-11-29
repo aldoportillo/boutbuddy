@@ -1,7 +1,7 @@
 <%= form_with(model: [event, bout, result], local: true, html: { class: 'form-horizontal' }) do |form| %>
-  <div class="row">
+  <div class="col-12">
     <% if result.errors.any? %>
-      <div id="error_explanation" class="alert alert-danger col-12">
+      <div id="error_explanation" class="alert alert-danger">
         <h2><%= pluralize(result.errors.count, "error") %> prohibited this result from being saved:</h2>
         <ul>
           <% result.errors.full_messages.each do |message| %>
@@ -10,25 +10,31 @@
         </ul>
       </div>
     <% end %>
+  </div>
 
-    <div class="form-group col-md-6">
+  <div class="col-md-6">
+    <div class="form-group">
       <%= form.label :winner_id, "Winner", class: 'control-label' %>
       <%= form.select :winner_id, 
-                      bout.participations.pluck(:user_id).map { |id| [User.find(id).username, id] },
-                      { include_blank: true },
-                      { class: 'form-control' } %>
-    </div>
-
-    <div class="form-group col-md-6">
-      <%= form.label :win_by_id, "Win By", class: 'control-label' %>
-      <%= form.select :win_by_id, 
-                      WinBy.order(name: :asc).map { |win_by| ["#{win_by.name} - #{win_by.description}", win_by.id] },
-                      { include_blank: true },
-                      { class: 'form-control' } %>
+                                            bout.participations.pluck(:user_id).map { |id| [User.find(id).username, id] },
+                                            { include_blank: true },
+                                            { class: 'form-control' } %>
     </div>
   </div>
 
-  <div class="form-group">
-    <%= form.submit class: 'btn btn-primary' %>
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= form.label :win_by_id, "Win By", class: 'control-label' %>
+      <%= form.select :win_by_id, 
+                                            WinBy.order(name: :asc).map { |win_by| ["#{win_by.name} - #{win_by.description}", win_by.id] },
+                                            { include_blank: true },
+                                            { class: 'form-control' } %>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="form-group">
+      <%= form.submit class: 'btn btn-primary' %>
+    </div>
   </div>
 <% end %>
