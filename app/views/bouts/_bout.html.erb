@@ -6,9 +6,9 @@
         <div class="d-flex align-items-center">
           <img src="<%= bout.red_corner_fighter.photo %>" class="rounded-circle <%= (bout.result && bout.red_corner_fighter == bout.result.winner) ? 'green-circle' : '' %>" style="width:100px; height: 100px; object-fit: cover; object-position: 0 0;">
           <div class="ms-3">
-            <%= link_to user_path(bout.red_corner_fighter.username) do %>
-              <h4 class="mb-0"><%= bout.red_corner_fighter.first_name %> <%= bout.red_corner_fighter.last_name %></h4>
-            <% end %>
+            <%#= link_to user_path(bout.red_corner_fighter.username) do %>
+              <h6 class="mb-0"><%= bout.red_corner_fighter.first_name %> <%= bout.red_corner_fighter.last_name %></h6>
+            <%# end %>
             <p class="mb-0">Reach: <%= bout.red_corner_fighter.reach %></p>
             <p class="mb-0">Height: <%= bout.red_corner_fighter.height %></p>
           </div>
@@ -21,7 +21,7 @@
       <div class="bout_card p-3 bg-white" id="<%= dom_id bout %>">
         <div class="row">
           <div class="col-12">
-            <h3><%= bout.weight_class.name %></h3>
+            <h4><%= bout.weight_class.name %></h4>
           </div>
 
           <% if current_user == bout.event.promoter && !bout.result %>
@@ -43,9 +43,9 @@
       <div class="bout_card p-3 bg-white" id="<%= dom_id bout %>">
         <div class="d-flex align-items-center">
           <div class="me-3">
-            <%= link_to user_path(bout.blue_corner_fighter.username) do %>
-              <h4 class="mb-0"><%= bout.blue_corner_fighter.first_name %> <%= bout.blue_corner_fighter.last_name %></h4>
-            <% end %>
+            <%#=link_to user_path(bout.blue_corner_fighter.username) do %>
+              <h6 class="mb-0"><%= bout.blue_corner_fighter.first_name %> <%= bout.blue_corner_fighter.last_name %></h6>
+            <%# end %>
             <p class="mb-0">Reach: <%= bout.blue_corner_fighter.reach %></p>
             <p class="mb-0">Height: <%= bout.blue_corner_fighter.height %></p>
           </div>
