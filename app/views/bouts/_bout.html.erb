@@ -1,39 +1,57 @@
-<div class="bout_card d-flex justify-content-between mb-3 p-3 bg-white" id="<%= dom_id bout %>">
-  <!-- Red Corner Fighter -->
-  <div class="d-flex align-items-center">
-    <img src="<%= bout.red_corner_fighter.photo %>" class="rounded-circle <%= (bout.result && bout.red_corner_fighter == bout.result.winner) ? 'green-circle' : '' %>" style="width:100px; height: 100px; object-fit: cover; object-position: 0 0;">
-    <div class="ms-3">
-      <%= link_to user_path(bout.red_corner_fighter.username) do %>
-        <h4 class="mb-0"><%= bout.red_corner_fighter.first_name %> <%= bout.red_corner_fighter.last_name %></h4>
-      <% end %>
-      <p class="mb-0">Reach: <%= bout.red_corner_fighter.reach %></p>
-      <p class="mb-0">Height: <%= bout.red_corner_fighter.height %></p>
+<div class="row">
+  <% @event.bouts.each do |bout| %>
+    <div class="col-md-4 mb-3">
+      <!-- Red Corner Fighter -->
+      <div class="bout_card p-3 bg-white" id="<%= dom_id bout %>">
+        <div class="d-flex align-items-center">
+          <img src="<%= bout.red_corner_fighter.photo %>" class="rounded-circle <%= (bout.result && bout.red_corner_fighter == bout.result.winner) ? 'green-circle' : '' %>" style="width:100px; height: 100px; object-fit: cover; object-position: 0 0;">
+          <div class="ms-3">
+            <%= link_to user_path(bout.red_corner_fighter.username) do %>
+              <h4 class="mb-0"><%= bout.red_corner_fighter.first_name %> <%= bout.red_corner_fighter.last_name %></h4>
+            <% end %>
+            <p class="mb-0">Reach: <%= bout.red_corner_fighter.reach %></p>
+            <p class="mb-0">Height: <%= bout.red_corner_fighter.height %></p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- Bout Weight Class and Win Form -->
-  
-  <div class="col-md-6 align-self-center">
-    <h3><%= bout.weight_class.name %></h3>
-    <% if current_user == bout.event.promoter && !bout.result %>
-      <% @result = Result.new %>
-      <%= render 'results/form', result: @result, event: @event, bout: bout %>
-      <% elsif bout.result %>
-      <%= "#{WinBy.find(bout.result.win_by_id).name} - #{WinBy.find(bout.result.win_by_id).description}" %>
-    <% end %>
-  </div>
+    <div class="col-md-4 mb-3 d-flex flex-column justify-content-end">
+      <!-- Bout Weight Class and Win Form -->
+      <div class="bout_card p-3 bg-white" id="<%= dom_id bout %>">
+        <div class="row">
+          <div class="col-12">
+            <h3><%= bout.weight_class.name %></h3>
+          </div>
 
-
-  <!-- Blue Corner Fighter -->
-  <div class="d-flex align-items-center">
-    <div class="me-3">
-      <%= link_to user_path(bout.blue_corner_fighter.username) do %>
-        <h4 class="mb-0"><%= bout.blue_corner_fighter.first_name %> <%= bout.blue_corner_fighter.last_name %></h4>
-      <% end %>
-      <p class="mb-0">Reach: <%= bout.blue_corner_fighter.reach %></p>
-      <p class="mb-0">Height: <%= bout.blue_corner_fighter.height %></p>
+          <% if current_user == bout.event.promoter && !bout.result %>
+            <% @result = Result.new %>
+            <div class="col-12">
+              <%= render 'results/form', result: @result, event: @event, bout: bout %>
+            </div>
+          <% elsif bout.result %>
+            <div class="col-12">
+              <%= "#{WinBy.find(bout.result.win_by_id).name} - #{WinBy.find(bout.result.win_by_id).description}" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-    <img src="<%= bout.blue_corner_fighter.photo %>" class="rounded-circle <%= (bout.result && bout.blue_corner_fighter == bout.result.winner) ? 'green-circle' : '' %>" style="width:100px; height: 100px; object-fit: cover; object-position: 0 0;">
-  </div>
 
+    <div class="col-md-4 mb-3">
+      <!-- Blue Corner Fighter -->
+      <div class="bout_card p-3 bg-white" id="<%= dom_id bout %>">
+        <div class="d-flex align-items-center">
+          <div class="me-3">
+            <%= link_to user_path(bout.blue_corner_fighter.username) do %>
+              <h4 class="mb-0"><%= bout.blue_corner_fighter.first_name %> <%= bout.blue_corner_fighter.last_name %></h4>
+            <% end %>
+            <p class="mb-0">Reach: <%= bout.blue_corner_fighter.reach %></p>
+            <p class="mb-0">Height: <%= bout.blue_corner_fighter.height %></p>
+          </div>
+          <img src="<%= bout.blue_corner_fighter.photo %>" class="rounded-circle <%= (bout.result && bout.blue_corner_fighter == bout.result.winner) ? 'green-circle' : '' %>" style="width:100px; height: 100px; object-fit: cover; object-position: 0 0;">
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
