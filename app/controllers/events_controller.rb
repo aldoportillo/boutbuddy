@@ -13,7 +13,7 @@ class EventsController < ApplicationController
       @q = current_user.own_events.order(time: :asc).ransack(params[:q])
       @events = @q.result
     else
-      @q = Event.order(time: :asc).ransack(params[:q])
+      @q = Event.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
       @events = @q.result
       
     end
