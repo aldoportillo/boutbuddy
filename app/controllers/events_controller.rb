@@ -7,10 +7,10 @@ class EventsController < ApplicationController
 
     ##USE PUNDIT FOR THIS LATER
     if current_user&.role == "fighter"
-      @q = current_user.events.order(time: :asc).ransack(params[:q])
+      @q = current_user.events.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
       @events = @q.result
     elsif current_user&.role == "promoter"
-      @q = current_user.own_events.order(time: :asc).ransack(params[:q])
+      @q = current_user.own_events.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
       @events = @q.result
     else
       @q = Event.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
