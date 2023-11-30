@@ -301,7 +301,7 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
       zeitwerk (~> 2.5)
-    rake (13.0.6)
+    rake (13.1.0)
     ransack (4.0.0)
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
@@ -463,6 +463,7 @@ DEPENDENCIES
   rails-erd
   rails_db
   rails_live_reload
+  rake (= 13.1.0)
   ransack
   redis (~> 4.0)
   rspec-html-matchers
