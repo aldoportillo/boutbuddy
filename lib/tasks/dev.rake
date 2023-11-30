@@ -227,10 +227,16 @@ task({ :sample_data => :environment }) do
 
   pp "There are now #{WinBy.count} methods of winning."
 
-  #### Generating Past Events #####
 
-  # Generating Past Events
-  CSV.foreach('lib/sample_data/events.csv', :headers => true) do |row|
+  # Generating 3 Past Events
+  prev_ev = Event.count
+  prev_swipe = Swipe.count
+  prev_bout = Bout.count
+
+  csv_rows = CSV.read('lib/sample_data/events.csv', headers: true).to_a
+  selected_rows = csv_rows.sample(3) 
+
+  selected_rows.each do |row|
     event = Event.new
     event.title = row[0]
     event.bio = row[1]
@@ -238,50 +244,55 @@ task({ :sample_data => :environment }) do
     event.price = rand(15..45)
     event.venue_id = Venue.all.sample.id
     event.photo = event_images.sample
-    event.promoter_id = User.where(:role => "promoter").sample.id
+    event.promoter_id = User.where(role: 'promoter').sample.id
     event.save!
   end
-  pp "Past Events were generated"
+  pp "#{Event.count - prev_ev} Past Events were generated"
+
+  # Selecting 36 Fighters for Swipes (18 bouts, 2 fighters per bout)
+  fighters = User.where(role: 'fighter').order("RANDOM()").first(36)
 
   # Generating Swipes
-  User.find_each do |user|
-    eligible_users = User.where(weight_class_id: user.weight_class_id).where.not(id: user.id)
-
-    eligible_users.find_each do |other_user|
-      Swipe.create!(
-        swiper_id: user.id,
-        swiped_id: other_user.id,
-        like: true
-      )
-    end
+  fighters.each_slice(2) do |user1, user2|
+    Swipe.create!(swiper_id: user1.id, swiped_id: user2.id, like: true)
+    Swipe.create!(swiper_id: user2.id, swiped_id: user1.id, like: true)
   end
+  pp "Swipes for #{Swipe.count - prev_swipe} bouts created"
 
-  pp "Past Swipes were generated"
-
-  # Generating Bouts from Swipes
-  Swipe.where(like: true).find_each do |swipe|
-    if Swipe.exists?(swiper_id: swipe.swiped_id, swiped_id: swipe.swiper_id, like: true)
-      existing_bouts = Bout.joins(:participations).where(participations: { user_id: [swipe.swiper_id, swipe.swiped_id] })
-      unless existing_bouts.exists?
-        bout = Bout.create!(
-          event: Event.where("time < ?", Time.now).order("RANDOM()").first,
-          weight_class_id: User.find(swipe.swiper_id).weight_class_id
-        )
+  # Generating Bouts from Mutual Swipes
+Swipe.where(like: true).find_each do |swipe|
+  # Check for a mutual like
+  if Swipe.exists?(swiper_id: swipe.swiped_id, swiped_id: swipe.swiper_id, like: true)
+    existing_bouts = Bout.joins(:participations).where(participations: { user_id: [swipe.swiper_id, swipe.swiped_id] })
     
+    # Proceed if no existing bout between these two fighters
+    unless existing_bouts.exists?
+      past_event = Event.where("time < ?", Time.now).order("RANDOM()").first
+
+      if past_event
+        bout = Bout.create!(event: past_event, weight_class_id: User.find(swipe.swiper_id).weight_class_id)
+
         if bout.persisted?
           Participation.create!(bout: bout, user_id: swipe.swiper_id, corner: 'red')
           Participation.create!(bout: bout, user_id: swipe.swiped_id, corner: 'blue')
 
-          # Generating Result for Bout
           Result.create!(
             bout_id: bout.id,
             winner_id: [swipe.swiper_id, swipe.swiped_id].sample,
             win_by_id: WinBy.all.sample.id
           )
+
+          [swipe.swiper_id, swipe.swiped_id].each do |fighter_id|
+            Message.create!(user_id: fighter_id, event: past_event, content: Faker::Quote.most_interesting_man_in_the_world)
+          end
         end
+      else
+        pp "No past events available for bouts"
       end
     end
   end
+end
+pp "#{Bout.count} Bouts with results and messages were generated"
 
-  pp "Past Bouts with results were generated"
+
 end
