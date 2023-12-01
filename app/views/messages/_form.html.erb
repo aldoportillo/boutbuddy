@@ -1,24 +1,24 @@
 <%= form_with(model: @message, url: event_messages_path(@event), class: "needs-validation", novalidate: true) do |form| %>
-      <% if @message.errors.any? %>
-        <div style="color: red">
-          <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
-          <ul>
-            <% @message.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
+  <% if @message.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading"><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h4>
+      <ul>
+        <% @message.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :event_id, value: @event.id %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <div class="input-group mb-3">
+    <%= form.text_field :content, class: "form-control", placeholder: "Type your message here...", required: true, aria: { label: 'Text input with send button' } %>
+    <div class="input-group-append">
+      <%= form.button type: 'submit', class: "btn btn-primary", aria: { label: 'Send message' } do %>
+        <i class="fas fa-paper-plane"></i>
       <% end %>
-
-      <%= form.hidden_field :event_id, value: @event.id %>
-      <%= form.hidden_field :user_id, value: current_user.id %>
-
-      <div class="form-group">
-        <%= form.label :content %>
-        <%= form.text_field :content, class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= form.submit class: "btn btn-primary" %>
-      </div>
-    <% end %>
+    </div>
+  </div>
+<% end %>
