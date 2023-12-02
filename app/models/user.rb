@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  admin                  :boolean          default(FALSE), not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string
@@ -73,6 +74,10 @@ class User < ApplicationRecord
     ["username"]
   end
 
+  def admin?
+    self.admin
+  end
+
   private
   
   def stack
@@ -86,4 +91,6 @@ class User < ApplicationRecord
   def swiped_user_ids
     given_swipes.select(:swiped_id)
   end
+
+  
 end
