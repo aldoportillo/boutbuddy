@@ -5,7 +5,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params.except(:photo))
 
     if params[:user][:photo].present?
-      uploaded_photo = Cloudinary::Uploader.upload(params[:user][:photo], folder: "boutbuddy/fighters")
+      uploaded_photo = Cloudinary::Uploader.upload(
+        params[:user][:photo],
+        folder: "boutbuddy/fighters",
+        transformation: [
+          { effect: "remove_background" },
+          { gravity: "person", aspect_ratio: "2:3", crop: "fill" }
+        ]
+      )
       resource.photo = uploaded_photo['secure_url']
     end
 
@@ -33,11 +40,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
     resource_updated = if params[:user][:photo].present?
-                          uploaded_photo = Cloudinary::Uploader.upload(params[:user][:photo], folder: "boutbuddy/fighters")
-                          update_resource(resource, account_update_params.except(:photo).merge(photo: uploaded_photo['secure_url']))
-                        else
-                          update_resource(resource, account_update_params)
-                        end
+                        uploaded_photo = Cloudinary::Uploader.upload(
+                          params[:user][:photo],
+                          folder: "boutbuddy/fighters",
+                          transformation: [{ effect: "remove_background" },
+                          { gravity: "person", aspect_ratio: "2:3", crop: "fill" }
+                          ]
+                        )
+                        update_resource(resource, account_update_params.except(:photo).merge(photo: uploaded_photo['secure_url']))
+                      end
     yield resource if block_given?
     if resource_updated
       set_flash_message_for_update(resource, prev_unconfirmed_email)
