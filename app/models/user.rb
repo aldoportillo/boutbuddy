@@ -74,6 +74,10 @@ class User < ApplicationRecord
     ["username"]
   end
 
+  def admin?
+    self.admin
+  end
+
   private
   
   def stack
@@ -87,4 +91,6 @@ class User < ApplicationRecord
   def swiped_user_ids
     given_swipes.select(:swiped_id)
   end
+
+  
 end
