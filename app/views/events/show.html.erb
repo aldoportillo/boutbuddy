@@ -8,8 +8,8 @@
       </div>
 
       <div class="d-flex justify-content-between mb-3">
-        <h5><%= @event.time.strftime("%a, %b %e, %Y") %></h5>
-        <h5><%= @event.time.strftime("%l:%M %p") %></h5>
+        <h5><%= @event.time&.strftime("%a, %b %e, %Y") %></h5>
+        <h5><%= @event.time&.strftime("%l:%M %p") %></h5>
       </div>
 
       <div class="d-flex justify-content-between align-items-center mb-3">
