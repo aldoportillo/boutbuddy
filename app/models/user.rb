@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  admin                  :boolean          default(FALSE), not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string
@@ -59,7 +60,7 @@ class User < ApplicationRecord
   has_many :own_events, class_name: "Event", foreign_key: "promoter_id"
   has_many :own_venues, class_name: "Venue", foreign_key: "promoter_id"
   
-  enum role: {admin: "admin", fighter: "fighter", promoter: "promoter", undetermined: "undetermined"}
+  enum role: {fighter: "fighter", promoter: "promoter", fan: "fan"}
 
 
   def users_not_swiped_on
