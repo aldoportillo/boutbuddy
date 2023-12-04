@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  authenticate :user, ->(user) { user.admin? } do
+    mount RailsAdmin::Engine, at: "admin", as: "rails_admin"
+  end
   
   resources :weight_classes
   
