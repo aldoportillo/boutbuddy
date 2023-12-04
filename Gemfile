@@ -10,6 +10,7 @@ gem "simple_form"
 
 gem "rails_admin", "~> 3.1"
 gem "sassc-rails"
+gem "cssbundling-rails"
 gem 'rake', '13.1.0'
 
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
@@ -46,8 +47,6 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-# Use Sass to process CSS
-# gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -90,7 +89,6 @@ gem "htmlbeautifier"
 gem "http"
 
 gem "table_print"
-gem "sassc-rails"
 
 group :development do
   gem "annotate"
