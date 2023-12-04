@@ -8,6 +8,9 @@ gem "cloudinary"
 gem "httparty"
 gem "simple_form"
 
+gem "rails_admin", "~> 3.1"
+gem "sassc-rails"
+
 gem 'rake', '13.1.0'
 
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
