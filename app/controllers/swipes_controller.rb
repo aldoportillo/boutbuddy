@@ -1,29 +1,33 @@
 class SwipesController < ApplicationController
   def create
     @swipe = Swipe.new(swipe_params)
-
-    # respond_to do |format|
-    #   if @swipe.save
-    #     check_for_match(@swipe)
-    #     format.html { redirect_to fighters_carousel_path, notice: 'Swipe was successfully created.' }
-    #     format.json { render json: @swipe, status: :created, location: @swipe }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @swipe.errors, status: :unprocessable_entity }
-    #   end
-    # end
-
-      if @swipe.save
-        if check_for_match(@swipe)
-            redirect_to event_path(@bout.event_id) and return ##Would be cool to get to a "You have a match page" to display info on the other guy and then visit event from there definetly possible too since bout has event_id and fighter_id for now lets route directly to event
-        else
-        end
+  
+    if @swipe.save
+      if check_for_match(@swipe)
+        # Handling match scenario
+        # Redirecting to a match page or event page can be handled here
+        # For now, as per your comment, redirecting to the event page
+        redirect_to event_path(@bout.event_id) and return
       else
-        flash.now[:alert] = 'Failed to save swipe.'
-        render :new and return
+        # Fetch the next fighter
+
+        session[:index] += 1
+        next_fighter_id = session[:fighters][session[:index]]
+        @next_fighter = User.find(next_fighter_id) if next_fighter_id
+
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.replace("fighter_card", partial: "users/fighter_profile_card", locals: { fighter: @next_fighter })
+          end
+          format.html { redirect_to fighters_carousel_path }
+        end
+        return
       end
-      redirect_to fighters_carousel_path
+    else
+      flash.now[:alert] = 'Failed to save swipe.'
+      render :new and return
     end
+  end
 
 
   private
