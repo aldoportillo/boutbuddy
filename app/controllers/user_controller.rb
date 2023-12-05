@@ -16,7 +16,7 @@ class UserController < ApplicationController
   end
 
   def carousel
-    @fighter = current_user.users_not_swiped_on.sample
+    @fighters = current_user.users_not_swiped_on
     render "users/carousel"
   end
 
