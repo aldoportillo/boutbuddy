@@ -1,5 +1,6 @@
 class VenuesController < ApplicationController
   require 'httparty'
+  before_action :authenticate_user!
   before_action :set_venue, only: %i[ show edit update destroy ]
   
 
