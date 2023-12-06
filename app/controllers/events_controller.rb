@@ -5,31 +5,18 @@ class EventsController < ApplicationController
   # GET /events or /events.json
   def index
     
-
-    # ##USE PUNDIT FOR THIS LATER
-    # if current_user&.role == "fighter"
-    #   @q = current_user.events.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
-    #   @events = @q.result
-    # elsif current_user&.role == "promoter"
-    #   @q = current_user.own_events.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
-    #   @events = @q.result
-    # else
-    #   @q = Event.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
-    #   @events = @q.result
+    if current_user&.role == "fighter"
+      @q = current_user.events.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
+      @events = @q.result
+    elsif current_user&.role == "promoter"
+      @q = current_user.own_events.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
+      @events = @q.result
+    else
+      @q = Event.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
+      @events = @q.result
       
-    # end
-
-    def index
-      @q = Event.ransack(params[:q])
-      
-      # Apply the policy scope to the result of the Ransack search
-      # and ensure the result is a relation that Ransack can work with
-      @events = policy_scope(@q.result(distinct: true))
-
-      # Apply further scoping if needed
-      @events = @events.order(time: :asc)
     end
-    
+
   end
 
   # GET /events/1 or /events/1.json
