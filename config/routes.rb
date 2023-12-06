@@ -3,12 +3,10 @@ Rails.application.routes.draw do
     mount RailsAdmin::Engine, at: "admin", as: "rails_admin"
   end
   
-  resources :weight_classes
-  
   resources :venues
   resources :events do
-    resources :messages
-    resources :bouts do
+    resources :messages, only: [:index, :new, :create]
+    resources :bouts, only: [:index, :new, :create] do
       resources :results, only: [:new, :create]
     end
   end
@@ -19,7 +17,7 @@ Rails.application.routes.draw do
   root "landing#index"
   
   get("/fighters" => "user#index", as: :users)
-  get("/fighters/carousel" => "user#carousel")#bandaid
+  get("/fighters/carousel" => "user#carousel")
   get("/fighters/:username" => "user#show", as: :user) 
 
   post 'swipes', to: 'swipes#create'
