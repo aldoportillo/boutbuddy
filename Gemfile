@@ -11,7 +11,7 @@ gem "simple_form"
 gem "rails_admin", "~> 3.1"
 gem "sassc-rails"
 gem 'rake', '13.1.0'
-
+gem 'pundit'
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 gem "sprockets-rails"
 

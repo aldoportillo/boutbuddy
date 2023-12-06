@@ -1,36 +1,44 @@
 class VenuesController < ApplicationController
   require 'httparty'
-
+  before_action :authenticate_user!
   before_action :set_venue, only: %i[ show edit update destroy ]
   
 
   # GET /venues or /venues.json
+  # def index
+  #   ##USE PUNDIT FOR THIS LATER
+  #   if current_user&.role == "promoter"
+  #     @venues = current_user.own_venues
+  #   else
+  #     @venues = Venue.all
+  #   end
+  # end
   def index
-    ##USE PUNDIT FOR THIS LATER
-    if current_user&.role == "promoter"
-      @venues = current_user.own_venues
-    else
-      @venues = Venue.all
-    end
+    @venues = policy_scope(Venue)
   end
 
   # GET /venues/1 or /venues/1.json
   def show
+    authorize @venue
   end
 
   # GET /venues/new
   def new
     @venue = Venue.new
+    authorize @venue
   end
 
   # GET /venues/1/edit
   def edit
+    authorize @venue
   end
 
   # POST /venues or /venues.json
   def create
-
     @venue = Venue.new(venue_params)
+    authorize @venue
+    
+
     lat, lng = get_coordinates_from_address(@venue.address)
 
     if lat && lng
@@ -54,6 +62,8 @@ class VenuesController < ApplicationController
 
   # PATCH/PUT /venues/1 or /venues/1.json
   def update
+    authorize @venue
+    
     respond_to do |format|
       if @venue.update(venue_params)
         format.html { redirect_to venue_url(@venue), notice: "Venue was successfully updated." }
@@ -67,6 +77,7 @@ class VenuesController < ApplicationController
 
   # DELETE /venues/1 or /venues/1.json
   def destroy
+    authorize @venue
     @venue.destroy
 
     respond_to do |format|
@@ -76,7 +87,6 @@ class VenuesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_venue
       @venue = Venue.find(params[:id])
     end
