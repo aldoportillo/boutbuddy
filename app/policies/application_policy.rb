@@ -13,7 +13,7 @@ class ApplicationPolicy
   end
 
   def show?
-    false
+    scope.where(id: record.id).exists?
   end
 
   def create?
@@ -43,11 +43,7 @@ class ApplicationPolicy
     end
 
     def resolve
-      raise NotImplementedError, "You must define #resolve in #{self.class}"
+      scope.all
     end
-
-    private
-
-    attr_reader :user, :scope
   end
 end
