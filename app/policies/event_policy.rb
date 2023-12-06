@@ -5,6 +5,8 @@ class EventPolicy < ApplicationPolicy
         @scope.all
       elsif @user&.role == "promoter"
         @user&.own_events
+      elsif @user&.role == "fighter"
+        @user&.events
       else
         @scope.where("time > ?", Time.now)
       end
