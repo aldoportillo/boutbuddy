@@ -7,7 +7,7 @@ class VenuePolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || user.role == "promoter"
+    user&.admin? || user&.role == "promoter"
   end
 
   def create?
@@ -15,7 +15,7 @@ class VenuePolicy < ApplicationPolicy
   end
 
   def new?
-    user.admin? || user.role == "promoter"
+    user&.admin? || user&.role == "promoter"
   end
 
   def edit?
@@ -37,10 +37,10 @@ class VenuePolicy < ApplicationPolicy
     end
 
     def resolve
-      if @user.admin?
+      if @user&.admin?
         @scope.all
-      elsif @user.role == "promoter"
-        @user.own_venues
+      elsif @user&.role == "promoter"
+        @user&.own_venues
       else
         @scope.none
       end
