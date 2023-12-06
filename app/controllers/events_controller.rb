@@ -1,21 +1,33 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_event, only: %i[ show edit update destroy ]
 
   # GET /events or /events.json
   def index
     
 
-    ##USE PUNDIT FOR THIS LATER
-    if current_user&.role == "fighter"
-      @q = current_user.events.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
-      @events = @q.result
-    elsif current_user&.role == "promoter"
-      @q = current_user.own_events.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
-      @events = @q.result
-    else
-      @q = Event.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
-      @events = @q.result
+    # ##USE PUNDIT FOR THIS LATER
+    # if current_user&.role == "fighter"
+    #   @q = current_user.events.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
+    #   @events = @q.result
+    # elsif current_user&.role == "promoter"
+    #   @q = current_user.own_events.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
+    #   @events = @q.result
+    # else
+    #   @q = Event.where("time > ?", Time.now).order(time: :asc).ransack(params[:q])
+    #   @events = @q.result
       
+    # end
+
+    def index
+      @q = Event.ransack(params[:q])
+      
+      # Apply the policy scope to the result of the Ransack search
+      # and ensure the result is a relation that Ransack can work with
+      @events = policy_scope(@q.result(distinct: true))
+
+      # Apply further scoping if needed
+      @events = @events.order(time: :asc)
     end
     
   end
@@ -28,15 +40,18 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    authorize @event
   end
 
   # GET /events/1/edit
   def edit
+    authorize @event
   end
 
   # POST /events or /events.json
   def create
     @event = Event.new(event_params)
+    authorize @event
 
     if params[:event][:photo].present?
       uploaded_image = Cloudinary::Uploader.upload(params[:event][:photo], folder: "boutbuddy/events")
@@ -58,6 +73,7 @@ class EventsController < ApplicationController
   def update
 
     @event = Event.find(params[:id])
+    authorize @event
 
     if params[:event][:photo].present?
       uploaded_image = Cloudinary::Uploader.upload(params[:event][:photo], folder: "boutbuddy/events")
@@ -82,6 +98,7 @@ class EventsController < ApplicationController
   # DELETE /events/1 or /events/1.json
   def destroy
     @event.destroy
+    authorize @event
 
     respond_to do |format|
       format.html { redirect_to events_url, notice: "Event was successfully destroyed." }
