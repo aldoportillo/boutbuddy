@@ -110,6 +110,7 @@ GEM
     color_namer (0.1.0)
       color (>= 1.4.1)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -324,6 +325,8 @@ GEM
       ffi (~> 1.0)
     rchardet (1.8.0)
     redis (4.8.1)
+    redis-client (0.19.0)
+      connection_pool
     regexp_parser (2.8.0)
     reline (0.3.3)
       io-console (~> 0.5)
@@ -380,6 +383,11 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sidekiq (7.2.0)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.14.0)
     simple_form (5.2.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -494,6 +502,7 @@ DEPENDENCIES
   rufo
   sassc-rails
   selenium-webdriver
+  sidekiq
   simple_form
   specs_to_readme
   sprockets-rails
