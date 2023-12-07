@@ -6,6 +6,9 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Sidekiq Path Configuration
+config.autoload_paths += %W(#{config.root}/app/sidekiq)
+
 module RailsTemplate
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
