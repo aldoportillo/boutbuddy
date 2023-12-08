@@ -1,5 +1,3 @@
-# config/schedule.rb
-
 every :sunday, at: '2:00 am' do
   runner "DestroyPreviousDataJob.perform_later"
 end
