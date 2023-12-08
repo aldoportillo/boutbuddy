@@ -4,4 +4,7 @@ class ApplicationJob < ActiveJob::Base
 
   # Most jobs are safe to ignore if the underlying records are no longer available
   # discard_on ActiveJob::DeserializationError
+
+  # to enuqueue: FightersJob.perform_later
+  # to run: bundle exec good_job start 
 end
