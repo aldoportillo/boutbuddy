@@ -1,4 +1,4 @@
-class WinByMethodsJob < ApplicationJob
+class WinByJob < ApplicationJob
   queue_as :default
 
   def perform
