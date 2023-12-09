@@ -1,4 +1,4 @@
-class DestroyPreviousDataJob < ApplicationJob
+class DestroyAllDataJob < ApplicationJob
   queue_as :default
 
   def perform
