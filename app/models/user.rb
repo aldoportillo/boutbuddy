@@ -34,6 +34,8 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
   before_save :assign_weight_class
+  before_save :assign_username
+  after_create :generate_initial_swipes
 
   #FOR FIGHTER
 
@@ -88,9 +90,23 @@ class User < ApplicationRecord
     self.weight_class = WeightClass.where('min <= :weight AND max >= :weight', weight: self.weight).first
   end
 
+  def assign_username
+    self.username = "#{self.first_name}-#{self.last_name}"
+  end
+
   def swiped_user_ids
     given_swipes.select(:swiped_id)
   end
 
+  def generate_initial_swipes
+    potential_swipers = User.where(weight_class: self.weight_class)
+                            .where.not(id: self.id)
+    
+    potential_swipers.each do |fighter|
+      if rand < 0.2
+        Swipe.create!(swiper: fighter, swiped: self, like: true)
+      end
+    end
+  end
   
 end
