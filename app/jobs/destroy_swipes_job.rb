@@ -1,4 +1,4 @@
-class DestroySwipesDataJob < ApplicationJob
+class DestroySwipesJob < ApplicationJob
   queue_as :default
 
   def perform
