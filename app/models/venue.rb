@@ -11,9 +11,12 @@
 #  updated_at  :datetime         not null
 #  promoter_id :integer
 #
+
+# Venue is a model that represents a venue.
 class Venue < ApplicationRecord
+  # Validate that the name and address are present before saving
   validates :name, :address, presence: true
   
+  # A venue has many events
   has_many :events, class_name: "Event", foreign_key: "venue_id"
-  
 end

@@ -13,7 +13,7 @@ gem "importmap-rails"
 # Hotwire & Stimulus
 gem "turbo-rails"
 gem "stimulus-rails"
-
+gem "pundit"
 # Redis & Kredis
 gem "redis", "~> 4.0"
 # gem "kredis"

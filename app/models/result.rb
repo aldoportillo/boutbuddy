@@ -17,8 +17,13 @@
 #
 #  fk_rails_...  (bout_id => bouts.id)
 #
+
+# Result is a model that represents a result of a bout.
 class Result < ApplicationRecord
+  # A result belongs to a bout
   belongs_to :bout
+  # A result belongs to a winner, which is a type of user
   belongs_to :winner, class_name: :User, foreign_key: :winner_id
+  # A result belongs to a win_by, which is a type of WinBy
   belongs_to :win_by, class_name: :WinBy, foreign_key: :win_by_id
 end

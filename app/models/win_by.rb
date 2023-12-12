@@ -8,8 +8,9 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+
+# WinBy is a model that represents a method of winning.
 class WinBy < ApplicationRecord
-
+  # A method of winning can be associated with many results
   has_many :results
-
 end
