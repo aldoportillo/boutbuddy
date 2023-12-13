@@ -2,6 +2,15 @@
 
 BoutBuddy is a web application designed to bridge the gap between fighters, promoters, and fans in the world of combat sports. This platform facilitates the discovery and promotion of fight events, enables fighters to find and sign up for bouts, and allows fans to follow and attend events.
 
+## Table of Contents
+- [About BoutBuddy](#about-boutbuddy)
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Contact](#contact)
+- [ERD](#erd)
+
 ## Features
 
 - **Event Creation and Management**: Promoters can create and manage events, setting up the foundation for bouts and inviting fighters to participate.
