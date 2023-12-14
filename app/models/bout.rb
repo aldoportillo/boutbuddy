@@ -14,10 +14,10 @@ class Bout < ApplicationRecord
   # A bout belongs to an event
   belongs_to :event
   # A bout has one result
-  has_one :result
+  has_one :result, dependent: :destroy
 
   # A bout has many participations (associations between fighters and bouts)
-  has_many :participations
+  has_many :participations, dependent: :destroy
   # A bout has many fighters through participations
   has_many :fighters, through: :participations, source: :user
 

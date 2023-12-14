@@ -22,12 +22,12 @@ class Event < ApplicationRecord
   belongs_to :promoter, class_name: :User, foreign_key: :promoter_id
 
   # An event has many bouts
-  has_many :bouts, class_name: "Bout", foreign_key: "event_id"
+  has_many :bouts, class_name: "Bout", foreign_key: "event_id", dependent: :destroy
   # An event has many fighters through bouts
   has_many :fighters, through: :bouts
 
   # An event has many messages
-  has_many :messages, class_name: "Message", foreign_key: "event_id"
+  has_many :messages, class_name: "Message", foreign_key: "event_id", dependent: :destroy
 
   # ransackable_attributes is a class method that returns the attributes that can be searched with Ransack
   def self.ransackable_attributes(auth_object = nil)
