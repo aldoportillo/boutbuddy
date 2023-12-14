@@ -48,17 +48,17 @@ class User < ApplicationRecord
   belongs_to :weight_class, optional: true
 
   # Associations for fighters
-  has_many :participations
-  has_many :bouts, through: :participations
+  has_many :participations, dependent: :destroy
+  has_many :bouts, through: :participations, dependent: :destroy
   has_many :events, -> { distinct }, through: :bouts
-  has_many :results, class_name: :Result, foreign_key: :winner_id
+  has_many :results, class_name: :Result, foreign_key: :winner_id, dependent: :destroy
   has_many :win_bys, through: :results
-  has_many :given_swipes, class_name: 'Swipe', foreign_key: 'swiper_id'
-  has_many :received_swipes, class_name: 'Swipe', foreign_key: 'swiped_id'
+  has_many :given_swipes, class_name: 'Swipe', foreign_key: 'swiper_id', dependent: :destroy
+  has_many :received_swipes, class_name: 'Swipe', foreign_key: 'swiped_id', dependent: :destroy
 
   # Associations for promoters
-  has_many :own_events, class_name: "Event", foreign_key: "promoter_id"
-  has_many :own_venues, class_name: "Venue", foreign_key: "promoter_id"
+  has_many :own_events, class_name: "Event", foreign_key: "promoter_id", dependent: :destroy
+  has_many :own_venues, class_name: "Venue", foreign_key: "promoter_id", dependent: :destroy
 
   # Class methods
   def self.ransackable_attributes(auth_object = nil)

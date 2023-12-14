@@ -18,5 +18,5 @@ class Venue < ApplicationRecord
   validates :name, :address, presence: true
   
   # A venue has many events
-  has_many :events, class_name: "Event", foreign_key: "venue_id"
+  has_many :events, class_name: "Event", foreign_key: "venue_id", dependent: :destroy
 end

@@ -4,24 +4,24 @@
   <div class="carousel-items">
     <div class="fighter-card">
       <% if @fighter %>
-        
-        <img src="<%= @fighter.photo %>" class="img-fluid rounded fence-background">
+
+        <img src="<%= @fighter.photo %>" class="img-fluid rounded fence-background" alt="<%@fighter.username%>-photo">
         <h3><%= @fighter.username %></h3>
         <div class="d-flex justify-content-around mt-3">
           <%= form_with model: Swipe.new, url: swipes_path, class: 'd-inline' do |form| %>
             <%= form.hidden_field :swiper_id, value: current_user.id %>
-            <%= form.hidden_field :swiped_id, value: @fighter.id %> 
+            <%= form.hidden_field :swiped_id, value: @fighter.id %>
             <%= form.hidden_field :like, value: true %>
-            <%= form.button class: "btn btn-primary" do %>
+            <%= form.button class: "btn btn-primary", 'aria-label' => 'Fight' do %>
               <i class="fa-solid fa-hand-fist fa-bounce fa-xl"></i>
             <% end %>
           <% end %>
 
           <%= form_with model: Swipe.new, url: swipes_path, class: 'd-inline' do |form| %>
             <%= form.hidden_field :swiper_id, value: current_user.id %>
-            <%= form.hidden_field :swiped_id, value: @fighter.id %> 
+            <%= form.hidden_field :swiped_id, value: @fighter.id %>
             <%= form.hidden_field :like, value: false %>
-            <%= form.button class: "btn btn-danger" do %>
+            <%= form.button class: "btn btn-danger", 'aria-label' => "Don't Fight" do %>
               <i class="fa-solid fa-face-sad-cry fa-shake fa-xl"></i>
             <% end %>
           <% end %>
