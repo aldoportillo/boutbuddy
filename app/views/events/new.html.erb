@@ -1,7 +1,11 @@
 <h1>New event</h1>
 
-<%= render "form", event: @event %>
-
+<% if current_user&.role == "promoter" && !current_user&.own_venues %>
+  <%= render "form", event: @event %>
+<% else %>
+  <p>You do not have any venues to host events. Please add venues.</p>
+  <%= link_to "New Venue", new_venue_path, class: 'btn btn-primary col-auto'%>
+<% end %>
 <br>
 
 <div>
