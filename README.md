@@ -60,7 +60,7 @@ To get BoutBuddy up and running on your local machine, follow these steps:
     rails db:create db:migrate
     ```
 
-5. To populate the database with initial data, run the sample data task:
+5. To populate the database with initial data, run the sample data task (Weight Class 155 has the most users. Use this to test any features):
 
     ```bash
     rake sample_data
