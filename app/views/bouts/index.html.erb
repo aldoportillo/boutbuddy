@@ -1,3 +1,4 @@
+<!-- I like how you used turbo tags -->
 <%= turbo_frame_tag "tab-content" do %>
   <% @event.bouts.each do |bout| %>
     <%= render partial: "bouts/bout", locals: { bout: bout } %>
